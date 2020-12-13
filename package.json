@@ -1,0 +1,32 @@
+{
+  "name": "sam-reporting-app",
+  "private": "true",
+  "version": "1.0.0",
+  "description": "Service And Maintenance Reporting App",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node backend/server",
+    "server": "nodemon backend/server",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flsoller/sam-reporting-app.git"
+  },
+  "author": "Florian Soller",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/flsoller/sam-reporting-app/issues"
+  },
+  "homepage": "https://github.com/flsoller/sam-reporting-app#readme",
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "nodemon": "^2.0.6"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1"
+  }
+}
