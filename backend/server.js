@@ -5,6 +5,7 @@ import connectDatabase from './config/database.js';
 
 // Route imports
 import maintenanceData from './routes/maintenanceData.js';
+import generateReport from './routes/generateReport.js';
 
 // Load env configuration
 dotenv.config();
@@ -17,6 +18,7 @@ const app = express();
 
 // Mount routers
 app.use('/api/v1/maintenance-data', maintenanceData);
+app.use('/api/v1/generate-pdf', generateReport);
 
 // Define server port
 const PORT = process.env.PORT || 5000;
