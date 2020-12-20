@@ -16,6 +16,9 @@ connectDatabase();
 // Run express
 const app = express();
 
+// JSON body-parser middleware
+app.use(express.json());
+
 // Mount routers
 app.use('/api/v1/maintenance-data', maintenanceData);
 app.use('/api/v1/generate-pdf', generateReport);
