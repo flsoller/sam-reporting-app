@@ -7,7 +7,6 @@ const SampleModelSchema = new mongoose.Schema({
     street: String,
     city: String,
     country: String,
-    required: [true, 'Please provide customer data'],
   },
   productName: {
     type: String,
@@ -20,30 +19,33 @@ const SampleModelSchema = new mongoose.Schema({
   maintenanceDate: {
     type: Date,
     default: Date.now,
-    required: [true, 'Please set a maintenance date'],
   },
   visualInspection: {
     isInletClear: Boolean,
     isUndamaged: Boolean,
     isFilterClean: {
-      type: Boolean,
+      wasClean: Boolean,
       wasReplaced: Boolean,
     },
   },
   functionalInspection: {
     targetValue: Number,
     targetGas: String,
-    unit: {
+    measureUnit: {
+      type: String,
+      required: true,
       enum: ['Vol%', 'ppm', '%LEL'],
     },
     calibrationPre: Number,
     calibrationAft: Number,
   },
   hasPassedInspection: {
-    type: Boolean,
+    hasPassed: Boolean,
     comment: {
       type: String,
       maxlength: [500, 'Comment can not be longer than 500 characters.'],
     },
   },
 });
+
+export default mongoose.model('SampleModel', SampleModelSchema);
