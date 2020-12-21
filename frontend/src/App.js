@@ -1,12 +1,10 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
+
+// Component imports
+import ExampleForm from './components/forms/ExampleForm';
 
 const App = () => {
-  return (
-    <Button variant="contained" color="primary">
-      Hello World
-    </Button>
-  );
+  return <ExampleForm />;
 };
 
 export default App;
