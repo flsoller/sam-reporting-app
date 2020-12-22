@@ -1,4 +1,6 @@
+// Package imports
 import React, { useState } from 'react';
+import axios from 'axios';
 
 // M-UI imports
 import {
@@ -10,6 +12,7 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
+// Style definiotions for M-UI
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
@@ -19,9 +22,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// Component code
 const ExampleForm = () => {
   const classes = useStyles();
 
+  // State for form inputs
   const [data, setData] = useState({
     customerName: '',
     installLocation: '',
@@ -41,7 +46,16 @@ const ExampleForm = () => {
   // Handle Submit
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(data);
+
+    // Post request to server
+    axios
+      .post('/api/v1/maintenance-data/', data)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -51,8 +65,6 @@ const ExampleForm = () => {
           className={classes.root}
           noValidate
           autoComplete="off"
-          action="/api/v1/maintenance-data/"
-          method="POST"
           onSubmit={handleSubmit}
         >
           <Typography variant="h4">Customer Details</Typography>
