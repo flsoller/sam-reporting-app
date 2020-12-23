@@ -1,20 +1,13 @@
 import { generateReport } from '../reports/sampleReport.js';
+import SampleModel from '../models/SampleModel.js';
 
 // @desc    Generate and return PDF report.
-// @route   GET /api/v1/maintenance-data
+// @route   GET /api/v1/generate-pdf/:id
 // @access  Private
 const getReport = async (req, res, next) => {
-  const data = {
-    name: 'AwesomeName',
-    desc: 'AwesomeDescription',
-    serialNumber: '1234567',
-  };
+  const data = await SampleModel.findById(req.params.id);
 
   generateReport(res, data);
-  //   res.status(200).json({
-  //     success: true,
-  //     data: 'Maintenance Data Object here',
-  //   });
 };
 
 export { getReport };
