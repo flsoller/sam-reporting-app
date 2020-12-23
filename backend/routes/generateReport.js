@@ -8,6 +8,6 @@ import { getReport } from '../controllers/generateReport.js';
 const router = express.Router();
 
 // Route definitions
-router.route('/').get(getReport);
+router.route('/:id').get(getReport);
 
 export default router;
