@@ -12,7 +12,7 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-// Style definiotions for M-UI
+// Style definitions for M-UI
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
