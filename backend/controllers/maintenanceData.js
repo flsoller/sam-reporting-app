@@ -1,13 +1,19 @@
 import SampleModel from '../models/SampleModel.js';
 
-// @desc    Get maintenance data
+// @desc    Get all maintenance db entries
 // @route   GET /api/v1/maintenance-data
 // @access  Private
 export const getMaintenanceData = async (req, res, next) => {
-  res.status(200).json({
-    success: true,
-    data: 'Maintenance Data Object here',
-  });
+  const allMaintenanceData = await SampleModel.find({});
+
+  try {
+    res.status(200).json({
+      success: true,
+      data: allMaintenanceData,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 // @desc    Create new entry for maintenance data document
