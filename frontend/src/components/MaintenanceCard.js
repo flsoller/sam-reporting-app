@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 // M-UI imports
 import { makeStyles } from '@material-ui/core/styles';
@@ -10,6 +11,7 @@ import {
   Typography,
 } from '@material-ui/core';
 
+// Style definitions for M-UI
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
@@ -22,13 +24,29 @@ const useStyles = makeStyles({
   },
 });
 
+// Component
 const MaintenanceCard = ({
+  id,
   customerName,
   productName,
   serialNumber,
   maintenanceDate,
 }) => {
   const classes = useStyles();
+
+  // Click handler to GET pdf report from backend
+  const clickHandler = async () => {
+    const { data } = await axios.get(`/api/v1/generate-pdf/${id}`, {
+      responseType: 'blob',
+    });
+
+    // Generate file
+    const file = new Blob([data], { type: 'application/pdf' });
+
+    // Create URL for new tab with pdf.
+    const fileURL = URL.createObjectURL(file);
+    window.open(fileURL, '_blank', 'noopener');
+  };
 
   return (
     <Card className={classes.root}>
@@ -51,7 +69,14 @@ const MaintenanceCard = ({
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Get Report</Button>
+        <Button
+          size="small"
+          variant="contained"
+          color="primary"
+          onClick={() => clickHandler()}
+        >
+          Get Report
+        </Button>
       </CardActions>
     </Card>
   );
