@@ -32,6 +32,7 @@ const ReportSelection = () => {
           <Grid item xs={12} sm={6} lg={4}>
             <MaintenanceCard
               key={entry._id}
+              id={entry._id}
               customerName={entry.customerName}
               productName={entry.productName}
               serialNumber={entry.serialNumber}
