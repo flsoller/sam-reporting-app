@@ -1,6 +1,6 @@
 ## SAM (Service And Maintenance) Reporting App.
 
-<img src="https://img.shields.io/badge/Project%20Status-Prototype-red?style=plastic"/>
+<img src="https://img.shields.io/badge/Project%20Status-preAlpha-red?style=plastic"/>
 
 A fullstack (web) application to document technical maintenance jobs and generate associated reports.
 
@@ -24,3 +24,7 @@ Initially:
 Potentially:
 
 - User (Customer) can log into application and review/request his own maintenance data.
+
+## Milestones
+
+A prototype and proof-of-concept status around the intended core features was completed on 27th of December 2020.
