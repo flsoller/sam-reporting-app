@@ -29,9 +29,8 @@ const ReportSelection = () => {
     <Grid container spacing={2} justify="center" style={{ marginTop: 5 }}>
       {maintenanceData.map((entry) => {
         return (
-          <Grid item xs={12} sm={6} lg={4}>
+          <Grid item xs={12} sm={6} lg={4} key={entry._id}>
             <MaintenanceCard
-              key={entry._id}
               id={entry._id}
               customerName={entry.customerName}
               productName={entry.productName}
