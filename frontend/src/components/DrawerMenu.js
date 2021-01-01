@@ -1,8 +1,24 @@
 import React from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 
 // M-UI imports
 import { makeStyles } from '@material-ui/core/styles';
-import { Drawer, Toolbar, List, Typography, Divider } from '@material-ui/core';
+import {
+  Drawer,
+  Toolbar,
+  List,
+  Typography,
+  Divider,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+} from '@material-ui/core';
+import {
+  AccountBoxRounded,
+  BallotRounded,
+  GroupAdd,
+  NoteAdd,
+} from '@material-ui/icons';
 
 const drawerWidth = 220;
 
@@ -34,15 +50,43 @@ const DrawerMenu = () => {
       <Toolbar />
       <div className={classes.drawerContainer}>
         <List>
-          <Typography variant="h5" noWrap>
-            Customers
-          </Typography>
+          <ListItem>
+            <Typography variant="h6" noWrap>
+              Customers
+            </Typography>
+          </ListItem>
+          <ListItem button component={RouterLink} to="/customers">
+            <ListItemIcon>
+              <AccountBoxRounded />
+            </ListItemIcon>
+            <ListItemText primary={'View Customers'} />
+          </ListItem>
+          <ListItem button component={RouterLink} to="/new-customer">
+            <ListItemIcon>
+              <GroupAdd />
+            </ListItemIcon>
+            <ListItemText primary={'Add Customer'} />
+          </ListItem>
         </List>
         <Divider />
         <List>
-          <Typography variant="h5" noWrap>
-            Maintenance
-          </Typography>
+          <ListItem>
+            <Typography variant="h6" noWrap>
+              Maintenance
+            </Typography>
+          </ListItem>
+          <ListItem button component={RouterLink} to="/reports">
+            <ListItemIcon>
+              <BallotRounded />
+            </ListItemIcon>
+            <ListItemText primary={'View Reports'} />
+          </ListItem>
+          <ListItem button component={RouterLink} to="/new-report">
+            <ListItemIcon>
+              <NoteAdd />
+            </ListItemIcon>
+            <ListItemText primary={'New Report'} />
+          </ListItem>
         </List>
       </div>
     </Drawer>
