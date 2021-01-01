@@ -1,5 +1,4 @@
 import React from 'react';
-// import { Link as RouterLink } from 'react-router-dom';
 
 // M-UI imports
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
@@ -24,16 +23,9 @@ const AppHeader = () => {
   return (
     <AppBar position="fixed" className={classes.appBar}>
       <Toolbar>
-        <Typography variant="h6" noWrap>
-          {/* ToDo: Display active route */}
-          SAM App: Current Route
+        <Typography variant="h5" noWrap>
+          SAM Application
         </Typography>
-        {/* <Button color="inherit" component={RouterLink} to="/">
-            Input Screen
-          </Button>
-          <Button color="inherit" component={RouterLink} to="/report">
-            Report Screen
-          </Button> */}
       </Toolbar>
     </AppBar>
   );
