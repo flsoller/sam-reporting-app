@@ -33,11 +33,22 @@ const useStyles = makeStyles((theme) => ({
 const NewCustomer = () => {
   const classes = useStyles();
 
-  const [data, setData] = useState({});
+  // Component input state
+  const [customerName, setCustomerName] = useState('');
+  const [address, setAddress] = useState({
+    street: '',
+    city: '',
+    postalCode: '',
+    country: '',
+  });
+  const [customerId, setCustomerId] = useState('');
+  const [customerRef, setCustomerRef] = useState('');
 
-  const handleChange = (e) => {
-    setData({ ...data, [e.target.id]: e.target.value });
+  // Change handler for address data
+  const handleAddressChange = (e) => {
+    setAddress({ ...address, [e.target.id]: e.target.value });
   };
+
   return (
     <Box display="flex" justifyContent="center">
       <Card className={classes.card}>
@@ -55,38 +66,38 @@ const NewCustomer = () => {
                 variant="outlined"
                 id="customerName"
                 size="small"
-                onChange={handleChange}
+                onChange={(e) => setCustomerName(e.target.value)}
               />
               <Divider />
               <Typography variant="subtitle2">Address Details</Typography>
               <TextField
                 fullWidth
                 variant="outlined"
-                id="street"
-                label="Street"
-                onChange={handleChange}
+                id="address"
+                label="Address"
                 size="small"
+                onChange={handleAddressChange}
               />
               <TextField
                 className={classes.width}
                 variant="outlined"
-                id="zipCode"
-                label="Zip Code"
-                onChange={handleChange}
+                id="postalCode"
+                label="Postal Code"
+                onChange={handleAddressChange}
                 size="small"
               />
               <TextField
                 variant="outlined"
                 id="city"
                 label="City"
-                onChange={handleChange}
+                onChange={handleAddressChange}
                 size="small"
               />
               <TextField
                 variant="outlined"
                 id="country"
                 label="Country"
-                onChange={handleChange}
+                onChange={handleAddressChange}
                 size="small"
               />
               <Divider />
@@ -96,14 +107,14 @@ const NewCustomer = () => {
                 variant="outlined"
                 id="customerRef"
                 label="Customer Reference"
-                onChange={handleChange}
+                onChange={(e) => setCustomerRef(e.target.value)}
                 size="small"
               />
               <TextField
                 variant="outlined"
                 id="customerId"
                 label="Customer ID"
-                onChange={handleChange}
+                onChange={(e) => setCustomerId(e.target.value)}
                 size="small"
               />
               <Divider />
