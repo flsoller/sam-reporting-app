@@ -2,10 +2,10 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 
 // Page imports
-import ReportSelection from '../../screens/ReportSelection';
-import Customers from '../../screens/Customers';
-import NewCustomer from '../../screens/NewCustomer';
-import ExampleForm from '../../components/forms/ExampleForm';
+import ReportSelection from '../../Maintenance/pages/ReportSelection';
+import Customers from '../../Customers/pages/Customers';
+import NewCustomer from '../../Customers/pages/NewCustomer';
+import ExampleForm from '../../Maintenance/components/ExampleForm';
 
 // Component
 const AppRouter = () => {
