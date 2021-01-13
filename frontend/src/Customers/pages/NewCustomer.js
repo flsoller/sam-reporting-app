@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 // M-UI imports
 import {
@@ -35,8 +36,8 @@ const NewCustomer = () => {
 
   // Component input state
   const [customerName, setCustomerName] = useState('');
-  const [address, setAddress] = useState({
-    street: '',
+  const [customerAddress, setCustomerAddress] = useState({
+    address: '',
     city: '',
     postalCode: '',
     country: '',
@@ -46,7 +47,28 @@ const NewCustomer = () => {
 
   // Change handler for address data
   const handleAddressChange = (e) => {
-    setAddress({ ...address, [e.target.id]: e.target.value });
+    setCustomerAddress({ ...customerAddress, [e.target.id]: e.target.value });
+  };
+
+  // Submit handler for posting data to server
+  const submitDataHandler = (e) => {
+    e.preventDefault();
+
+    const data = {
+      customerName,
+      customerAddress,
+      customerId,
+      customerRef,
+    };
+
+    axios
+      .post('/api/v1/customers', data)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -123,6 +145,7 @@ const NewCustomer = () => {
                 color="primary"
                 type="submit"
                 startIcon={<AddCircleOutline />}
+                onClick={submitDataHandler}
               >
                 Add Customer
               </Button>
