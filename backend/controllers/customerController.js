@@ -33,3 +33,11 @@ export const createCustomer = asyncHandler(async (req, res, next) => {
     throw new Error('Invalid customer data');
   }
 });
+
+// @desc    Return all customers from database
+// @route   GET /api/v1/customers
+// @access  Private
+export const getAllCustomers = asyncHandler(async (req, res, next) => {
+  const allCustomers = await Customer.find({});
+  res.status(200).json(allCustomers);
+});
