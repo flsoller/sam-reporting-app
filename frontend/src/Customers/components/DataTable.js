@@ -13,17 +13,18 @@ import {
 } from '@material-ui/core';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 
-// Table cell with customer properties
+// Table cell with custom properties
 const StyledTableCell = withStyles((theme) => ({
   head: {
     backgroundColor: '#d9e3fa',
+    fontSize: 16,
   },
   body: {
     fontSize: 14,
   },
 }))(TableCell);
 
-// Table row with customer properties
+// Table row with custom properties
 const StyledTableRow = withStyles((theme) => ({
   root: {
     '&:nth-of-type(even)': {
@@ -31,30 +32,6 @@ const StyledTableRow = withStyles((theme) => ({
     },
   },
 }))(TableRow);
-
-// Dummy data creator
-function createData(customerName, city, street, country) {
-  return { customerName, city, street, country };
-}
-
-// Dummy data
-const rows = [
-  createData('Customer One', 'Berlin', 'Awesome Street 5', 'Germany'),
-  createData('Customer Two', 'Berlin', 'Awesome Street 5', 'Germany'),
-  createData('Customer Three', 'Berlin', 'Awesome Street 5', 'Germany'),
-  createData('Customer Four', 'Berlin', 'Awesome Street 5', 'Germany'),
-  createData('Customer Five', 'Berlin', 'Awesome Street 5', 'Germany'),
-  createData('Customer One', 'Berlin', 'Awesome Street 5', 'Germany'),
-  createData('Customer Two', 'Berlin', 'Awesome Street 5', 'Germany'),
-  createData('Customer Three', 'Berlin', 'Awesome Street 5', 'Germany'),
-  createData('Customer Four', 'Berlin', 'Awesome Street 5', 'Germany'),
-  createData('Customer Five', 'Berlin', 'Awesome Street 5', 'Germany'),
-  createData('Customer One', 'Berlin', 'Awesome Street 5', 'Germany'),
-  createData('Customer Two', 'Berlin', 'Awesome Street 5', 'Germany'),
-  createData('Customer Three', 'Berlin', 'Awesome Street 5', 'Germany'),
-  createData('Customer Four', 'Berlin', 'Awesome Street 5', 'Germany'),
-  createData('Customer Five', 'Berlin', 'Awesome Street 5', 'Germany'),
-];
 
 // Style definitions for M-UI
 const useStyles = makeStyles({
@@ -67,7 +44,7 @@ const useStyles = makeStyles({
 });
 
 // Component
-const CustomizedTables = () => {
+const CustomizedTables = ({ customerDataSet }) => {
   const classes = useStyles();
 
   return (
@@ -87,14 +64,18 @@ const CustomizedTables = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.customerName}>
+          {customerDataSet.map((customer) => (
+            <StyledTableRow key={customer._id}>
               <StyledTableCell component="th" scope="row">
-                {row.customerName}
+                {customer.customerName}
               </StyledTableCell>
-              <StyledTableCell>{row.city}</StyledTableCell>
-              <StyledTableCell>{row.street}</StyledTableCell>
-              <StyledTableCell>{row.country}</StyledTableCell>
+              <StyledTableCell>{customer.customerAddress.city}</StyledTableCell>
+              <StyledTableCell>
+                {customer.customerAddress.address}
+              </StyledTableCell>
+              <StyledTableCell>
+                {customer.customerAddress.country}
+              </StyledTableCell>
               <StyledTableCell align="right">
                 <Button variant="contained" color="primary">
                   Details
