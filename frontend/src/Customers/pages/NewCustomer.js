@@ -82,11 +82,12 @@ const NewCustomer = () => {
               autoComplete="off"
               // onSubmit={handleSubmit}
             >
-              <Typography variant="subtitle2">Customer Name</Typography>
+              <Typography variant="subtitle2">Customer Details</Typography>
               <TextField
                 fullWidth
                 variant="outlined"
                 id="customerName"
+                label="Customer Name"
                 size="small"
                 onChange={(e) => setCustomerName(e.target.value)}
               />
