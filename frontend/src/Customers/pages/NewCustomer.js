@@ -89,6 +89,7 @@ const NewCustomer = () => {
                 id="customerName"
                 label="Customer Name"
                 size="small"
+                value={customerName}
                 onChange={(e) => setCustomerName(e.target.value)}
               />
               <Divider />
@@ -99,6 +100,7 @@ const NewCustomer = () => {
                 id="address"
                 label="Address"
                 size="small"
+                value={customerAddress.address}
                 onChange={handleAddressChange}
               />
               <TextField
@@ -106,6 +108,7 @@ const NewCustomer = () => {
                 variant="outlined"
                 id="postalCode"
                 label="Postal Code"
+                value={customerAddress.postalCode}
                 onChange={handleAddressChange}
                 size="small"
               />
@@ -113,6 +116,7 @@ const NewCustomer = () => {
                 variant="outlined"
                 id="city"
                 label="City"
+                value={customerAddress.city}
                 onChange={handleAddressChange}
                 size="small"
               />
@@ -120,6 +124,7 @@ const NewCustomer = () => {
                 variant="outlined"
                 id="country"
                 label="Country"
+                value={customerAddress.country}
                 onChange={handleAddressChange}
                 size="small"
               />
@@ -130,6 +135,7 @@ const NewCustomer = () => {
                 variant="outlined"
                 id="customerRef"
                 label="Customer Reference"
+                value={customerRef}
                 onChange={(e) => setCustomerRef(e.target.value)}
                 size="small"
               />
@@ -137,6 +143,7 @@ const NewCustomer = () => {
                 variant="outlined"
                 id="customerId"
                 label="Customer ID"
+                value={customerId}
                 onChange={(e) => setCustomerId(e.target.value)}
                 size="small"
               />
