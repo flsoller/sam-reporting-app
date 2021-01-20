@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useSnackbar } from 'notistack';
 
 // M-UI imports
 import {
@@ -50,25 +51,32 @@ const NewCustomer = () => {
     setCustomerAddress({ ...customerAddress, [e.target.id]: e.target.value });
   };
 
+  // Snackbar component
+  const { enqueueSnackbar } = useSnackbar();
+
   // Submit handler for posting data to server
-  const submitDataHandler = (e) => {
+  const submitDataHandler = async (e) => {
     e.preventDefault();
 
-    const data = {
+    const submitData = {
       customerName,
       customerAddress,
       customerId,
       customerRef,
     };
 
-    axios
-      .post('/api/v1/customers', data)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    try {
+      const { data } = await axios.post('/api/v1/customers', submitData);
+      console.log(data.message);
+      enqueueSnackbar(data.message, { variant: 'success' });
+    } catch (error) {
+      enqueueSnackbar(
+        error.response.data.message
+          ? error.response.data.message
+          : error.message,
+        { variant: 'error' }
+      );
+    }
   };
 
   return (
