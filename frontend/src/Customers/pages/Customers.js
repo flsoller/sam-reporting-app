@@ -1,28 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+
+import * as useCustomerAPI from '../hooks/useCustomerAPI';
 import DataTable from '../components/DataTable';
-import axios from 'axios';
 
 const Customers = () => {
-  // State
-  const [customerData, setCustomerData] = useState([]);
-
-  // Get customer data array from server on first render
-  const getCustomerData = async () => {
-    try {
-      const { data } = await axios.get('api/v1/customers');
-      setCustomerData(data);
-      console.log(data);
-    } catch (error) {}
-  };
-
-  useEffect(() => {
-    getCustomerData();
-  }, []);
+  const data = useCustomerAPI.GetAll();
 
   return (
     <div>
       <h1>Customer Overview</h1>
-      <DataTable customerDataSet={customerData} />
+      <DataTable customerDataSet={data} />
     </div>
   );
 };
