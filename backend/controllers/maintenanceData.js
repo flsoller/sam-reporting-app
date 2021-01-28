@@ -7,10 +7,7 @@ export const getMaintenanceData = async (req, res, next) => {
   const allMaintenanceData = await SampleModel.find({});
 
   try {
-    res.status(200).json({
-      success: true,
-      data: allMaintenanceData,
-    });
+    res.status(200).json(allMaintenanceData);
   } catch (error) {
     console.log(error);
   }
