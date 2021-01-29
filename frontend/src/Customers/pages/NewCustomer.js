@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import * as useCustomerAPI from '../hooks/useCustomerAPI';
 import { useSnackbar } from 'notistack';
 
 // M-UI imports
@@ -58,24 +58,18 @@ const NewCustomer = () => {
   const submitDataHandler = async (e) => {
     e.preventDefault();
 
-    const submitData = {
+    // Custom hook for API communication
+    const { data, status } = await useCustomerAPI.CreateNew(
       customerName,
       customerAddress,
       customerId,
-      customerRef,
-    };
+      customerRef
+    );
 
-    try {
-      const { data } = await axios.post('/api/v1/customers', submitData);
-      console.log(data.message);
+    if (status === 201) {
       enqueueSnackbar(data.message, { variant: 'success' });
-    } catch (error) {
-      enqueueSnackbar(
-        error.response.data.message
-          ? error.response.data.message
-          : error.message,
-        { variant: 'error' }
-      );
+    } else {
+      enqueueSnackbar(data.message, { variant: 'error' });
     }
   };
 
