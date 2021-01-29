@@ -18,3 +18,23 @@ export const GetAll = () => {
 
   return data;
 };
+
+export const CreateNew = async (
+  customerName,
+  customerAddress,
+  customerId,
+  customerRef
+) => {
+  try {
+    const res = await axios.post('api/v1/customers', {
+      customerName,
+      customerAddress,
+      customerId,
+      customerRef,
+    });
+
+    return res;
+  } catch (error) {
+    return error.response;
+  }
+};
