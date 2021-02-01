@@ -1,5 +1,5 @@
-import { generateReport } from '../reports/sampleReport.js';
-import SampleModel from '../models/SampleModel.js';
+import { generateReport } from '../templates/sampleReport.js';
+import SampleModel from '../../Maintenance/models/SampleModel.js';
 
 // @desc    Generate and return PDF report.
 // @route   GET /api/v1/generate-pdf/:id

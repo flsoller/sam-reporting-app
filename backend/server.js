@@ -4,9 +4,9 @@ import dotenv from 'dotenv';
 import connectDatabase from './config/database.js';
 
 // Route imports
-import maintenanceData from './routes/maintenanceData.js';
-import generateReport from './routes/generateReport.js';
-import customerRoutes from './routes/customerRoutes.js';
+import maintenanceData from './Maintenance/routes/maintenanceData.js';
+import generateReport from './Reports/routes/generateReport.js';
+import customerRoutes from './Customers/routes/customerRoutes.js';
 
 // File imports
 import { errorHandler } from './middleware/errorMiddleware.js';

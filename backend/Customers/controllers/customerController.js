@@ -1,4 +1,4 @@
-import asyncHandler from '../middleware/asyncHandler.js';
+import asyncHandler from '../../middleware/asyncHandler.js';
 import Customer from '../models/CustomerModel.js';
 
 // @desc    Create new customer in database
