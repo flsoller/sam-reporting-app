@@ -1,4 +1,4 @@
-import React from 'react';
+import {Customer} from '../customer.model';
 
 // M-UI imports
 import { makeStyles } from '@material-ui/core/styles';
@@ -19,7 +19,7 @@ const useStyles = makeStyles({
 });
 
 // Component
-const CustomerCard = ({ customerName, customerId, city, street }) => {
+const CustomerCard = ({ customerName, customerId, customerAddress}: Customer) => {
   const classes = useStyles();
 
   return (
@@ -32,10 +32,10 @@ const CustomerCard = ({ customerName, customerId, city, street }) => {
           {customerName}
         </Typography>
         <Typography variant="body1" color="textSecondary">
-          {city}
+          {customerAddress.city}
         </Typography>
         <Typography variant="body1" color="textSecondary" component="p">
-          {street}
+          {customerAddress.streetAddress}
         </Typography>
       </CardContent>
     </Card>
