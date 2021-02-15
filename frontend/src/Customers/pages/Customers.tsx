@@ -1,10 +1,11 @@
 import React from 'react';
+import {Customer} from '../customer.model'
 
 import * as useCustomerAPI from '../hooks/useCustomerAPI';
 import DataTable from '../components/DataTable';
 
 const Customers = () => {
-  const data = useCustomerAPI.GetAll();
+  const data: Customer[] = useCustomerAPI.GetAll();
 
   return (
     <div>
