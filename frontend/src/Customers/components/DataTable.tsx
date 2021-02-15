@@ -1,4 +1,4 @@
-import React from 'react';
+import { Customer } from '../customer.model';
 
 // M-UI imports
 import {
@@ -14,7 +14,7 @@ import {
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 
 // Table cell with custom properties
-const StyledTableCell = withStyles((theme) => ({
+const StyledTableCell = withStyles(() => ({
   head: {
     backgroundColor: '#d9e3fa',
     fontSize: 16,
@@ -25,7 +25,7 @@ const StyledTableCell = withStyles((theme) => ({
 }))(TableCell);
 
 // Table row with custom properties
-const StyledTableRow = withStyles((theme) => ({
+const StyledTableRow = withStyles(() => ({
   root: {
     '&:nth-of-type(even)': {
       backgroundColor: '#eff3fc',
@@ -44,7 +44,7 @@ const useStyles = makeStyles({
 });
 
 // Component
-const CustomizedTables = ({ customerDataSet }) => {
+const CustomizedTables = ({customerDataSet}: {customerDataSet: Customer[]}) => {
   const classes = useStyles();
 
   return (
@@ -71,7 +71,7 @@ const CustomizedTables = ({ customerDataSet }) => {
               </StyledTableCell>
               <StyledTableCell>{customer.customerAddress.city}</StyledTableCell>
               <StyledTableCell>
-                {customer.customerAddress.address}
+                {customer.customerAddress.streetAddress}
               </StyledTableCell>
               <StyledTableCell>
                 {customer.customerAddress.country}
