@@ -5,6 +5,7 @@ import express from 'express';
 import {
   createCustomer,
   getAllCustomers,
+  getCustomerById,
 } from '../controllers/customerController.js';
 
 // Initialize router
@@ -12,5 +13,6 @@ const router = express.Router();
 
 // Route definitions
 router.route('/').post(createCustomer).get(getAllCustomers);
+router.route('/:id').get(getCustomerById);
 
 export default router;
