@@ -19,6 +19,24 @@ export const GetAll = () => {
   return data;
 };
 
+export const GetSingle = (id) => {
+  const [data, setData] = useState({});
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const { data } = await axios.get(`api/v1/customers/${id}`);
+        setData(data);
+      } catch (error) {
+        return error.response;
+      }
+    };
+    getData();
+  }, [id]);
+
+  return data;
+};
+
 export const CreateNew = async (
   customerName,
   customerAddress,
