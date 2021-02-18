@@ -7,7 +7,7 @@ export const GetAll = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const { data } = await axios.get('api/v1/customers');
+        const { data } = await axios.get('/api/v1/customers');
         setData(data);
       } catch (error) {
         console.error(`Error: ${error}`);
@@ -20,21 +20,21 @@ export const GetAll = () => {
 };
 
 export const GetSingle = (id) => {
-  const [data, setData] = useState({});
+  const [customerData, setCustomerData] = useState();
 
   useEffect(() => {
-    const getData = async () => {
+    const getCustomer = async () => {
       try {
-        const { data } = await axios.get(`api/v1/customers/${id}`);
-        setData(data);
+        const { data } = await axios.get(`/api/v1/customers/${id}`);
+        setCustomerData(data);
       } catch (error) {
         return error.response;
       }
     };
-    getData();
+    getCustomer(id);
   }, [id]);
 
-  return data;
+  return customerData;
 };
 
 export const CreateNew = async (
