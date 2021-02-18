@@ -1,4 +1,5 @@
 import { Customer } from '../customer.model';
+import { Link as RouterLink } from 'react-router-dom';
 
 // M-UI imports
 import {
@@ -77,7 +78,7 @@ const CustomizedTables = ({customerDataSet}: {customerDataSet: Customer[]}) => {
                 {customer.customerAddress.country}
               </StyledTableCell>
               <StyledTableCell align="right">
-                <Button variant="contained" color="primary">
+                <Button variant="contained" color="primary" component={RouterLink} to={`/customers/${customer._id}`}>
                   Details
                 </Button>
               </StyledTableCell>
