@@ -19,7 +19,7 @@ const useStyles = makeStyles({
 });
 
 // Component
-const CustomerCard = ({ customerName, customerId, customerAddress}: Customer) => {
+const CustomerCard = ({ customerName, customerId, customerAddress}: Partial<Customer>) => {
   const classes = useStyles();
 
   return (
@@ -32,10 +32,12 @@ const CustomerCard = ({ customerName, customerId, customerAddress}: Customer) =>
           {customerName}
         </Typography>
         <Typography variant="body1" color="textSecondary">
-          {customerAddress.city}
+          {/* assertion operator '!' used as parent component will only display card if data is true */}
+          {customerAddress!.city}
         </Typography>
         <Typography variant="body1" color="textSecondary" component="p">
-          {customerAddress.streetAddress}
+          {/* assertion operator '!' used as parent component will only display card if data is true */}
+          {customerAddress!.streetAddress}
         </Typography>
       </CardContent>
     </Card>
