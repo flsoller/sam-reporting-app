@@ -13,6 +13,7 @@ import {
   Button,
 } from '@material-ui/core';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
+import Spinner from '../../Shared/components/Spinner';
 
 // Table cell with custom properties
 const StyledTableCell = withStyles(() => ({
@@ -45,10 +46,14 @@ const useStyles = makeStyles({
 });
 
 // Component
-const CustomizedTables = ({customerDataSet}: {customerDataSet: Customer[]}) => {
+const CustomizedTables = ({
+  customerDataSet,
+}: {
+  customerDataSet: Customer[];
+}) => {
   const classes = useStyles();
 
-  return (
+  return customerDataSet.length !== 0 ? (
     <TableContainer component={Paper} className={classes.container}>
       <Table
         className={classes.table}
@@ -78,7 +83,12 @@ const CustomizedTables = ({customerDataSet}: {customerDataSet: Customer[]}) => {
                 {customer.customerAddress.country}
               </StyledTableCell>
               <StyledTableCell align="right">
-                <Button variant="contained" color="primary" component={RouterLink} to={`/customers/${customer._id}`}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  component={RouterLink}
+                  to={`/customers/${customer._id}`}
+                >
                   Details
                 </Button>
               </StyledTableCell>
@@ -87,6 +97,8 @@ const CustomizedTables = ({customerDataSet}: {customerDataSet: Customer[]}) => {
         </TableBody>
       </Table>
     </TableContainer>
+  ) : (
+    <Spinner size="4rem" />
   );
 };
 
