@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import * as useCustomerAPI from '../hooks/useCustomerAPI';
-import { useSnackbar } from 'notistack';
 
 // M-UI imports
 import {
@@ -51,9 +50,6 @@ const NewCustomer = () => {
     setCustomerAddress({ ...customerAddress, [e.target.id]: e.target.value });
   };
 
-  // Snackbar component
-  const { enqueueSnackbar } = useSnackbar();
-
   // Submit handler for posting data to server
   const submitDataHandler = async (e) => {
     e.preventDefault();
@@ -65,12 +61,6 @@ const NewCustomer = () => {
       customerId,
       customerRef
     );
-
-    if (status === 201) {
-      enqueueSnackbar(data.message, { variant: 'success' });
-    } else {
-      enqueueSnackbar(data.message, { variant: 'error' });
-    }
   };
 
   return (
