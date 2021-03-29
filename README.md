@@ -25,6 +25,6 @@ Potentially:
 
 - User (Customer) can log into application and review/request his own maintenance data.
 
-## Milestones
+## Disclaimer
 
-A prototype and proof-of-concept status around the intended core features was completed on 27th of December 2020.
+This is a personal project that is intended to see actual usage at some point but also provide a basis of learning different technologies.
