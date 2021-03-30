@@ -12,6 +12,7 @@ import {
   Paper,
   Button,
 } from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 
 // Table cell with custom properties
@@ -89,6 +90,14 @@ const CustomizedTables = ({
                   to={`/customers/${customer._id}`}
                 >
                   Details
+                </Button>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  startIcon={<DeleteIcon />}
+                  style={{ marginLeft: '0.5rem' }}
+                >
+                  Delete
                 </Button>
               </StyledTableCell>
             </StyledTableRow>
