@@ -2,7 +2,7 @@ import { Customer } from '../customer.model';
 
 import * as useCustomerAPI from '../hooks/useCustomerAPI';
 import DataTable from '../components/DataTable';
-import Spinner from '../../Shared/components/Spinner';
+import Spinner from '../../shared/components/Spinner';
 
 const Customers = () => {
   const data: Customer[] = useCustomerAPI.GetAll();

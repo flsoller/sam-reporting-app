@@ -5,7 +5,7 @@ import * as useCustomerAPI from '../hooks/useCustomerAPI';
 import CustomerCard from '../components/CustomerCard';
 
 import { Box } from '@material-ui/core';
-import Spinner from '../../Shared/components/Spinner';
+import Spinner from '../../shared/components/Spinner';
 
 const CustomerDetails = () => {
   const { id } = useParams<{ id: string }>();

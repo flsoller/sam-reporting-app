@@ -1,11 +1,11 @@
 import { Route } from 'react-router-dom';
 
 // Page imports
-import ReportSelection from '../../Maintenance/pages/ReportSelection';
-import Customers from '../../Customers/pages/Customers';
-import CustomerDetails from '../../Customers/pages/CustomerDetails'
-import NewCustomer from '../../Customers/pages/NewCustomer';
-import ExampleForm from '../../Maintenance/components/ExampleForm';
+import ReportSelection from '../../maintenance/pages/ReportSelection';
+import Customers from '../../customers/pages/Customers';
+import CustomerDetails from '../../customers/pages/CustomerDetails';
+import NewCustomer from '../../customers/pages/NewCustomer';
+import ExampleForm from '../../maintenance/components/ExampleForm';
 
 // Component
 const AppRouter = () => {
