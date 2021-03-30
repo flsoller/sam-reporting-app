@@ -13,7 +13,6 @@ import {
   Button,
 } from '@material-ui/core';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
-import Spinner from '../../Shared/components/Spinner';
 
 // Table cell with custom properties
 const StyledTableCell = withStyles(() => ({
@@ -53,7 +52,7 @@ const CustomizedTables = ({
 }) => {
   const classes = useStyles();
 
-  return customerDataSet.length !== 0 ? (
+  return (
     <TableContainer component={Paper} className={classes.container}>
       <Table
         className={classes.table}
@@ -97,8 +96,6 @@ const CustomizedTables = ({
         </TableBody>
       </Table>
     </TableContainer>
-  ) : (
-    <Spinner size="4rem" />
   );
 };
 
