@@ -80,11 +80,11 @@ const DrawerMenu = () => {
             </ListItemIcon>
             <ListItemText primary={'View Reports'} />
           </ListItem>
-          <ListItem button component={RouterLink} to="/new-report">
+          <ListItem button component={RouterLink} to="/new-maintenance">
             <ListItemIcon>
               <NoteAdd />
             </ListItemIcon>
-            <ListItemText primary={'New Report'} />
+            <ListItemText primary={'New Maintenance'} />
           </ListItem>
         </List>
       </div>
