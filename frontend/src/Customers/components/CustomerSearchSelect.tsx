@@ -20,7 +20,7 @@ const CustomerSearchSelect = (props: Props) => {
         }
         style={{ width: 300 }}
         renderInput={(params) => (
-          <TextField {...params} label="Combo box" variant="outlined" />
+          <TextField {...params} label="Select Customer" variant="outlined" />
         )}
       />
     </>
