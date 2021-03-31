@@ -1,6 +1,6 @@
 ## SAM (Service And Maintenance) Reporting App.
 
-<img src="https://img.shields.io/badge/Project%20Status-preAlpha-red?style=plastic"/>
+<img src="https://img.shields.io/badge/Project%20Status-WIP-red?style=plastic"/>
 
 A fullstack (web) application to document technical maintenance jobs and generate associated reports.
 
@@ -9,6 +9,10 @@ A fullstack (web) application to document technical maintenance jobs and generat
 This is a project to provide an application for technical field service operatives or in-house service centers to generate and track maintenance reports. The current heavily used solution in the industry is Excel, which (in this authors view) has lost its practicality compared to todays available technologies.
 
 The idea is to provide a modern solution that simplifies any and all tasks related to generating, tracking and distributing maintenance data and reports. Since each company serves different products, the report and data templates in this project serve as an example.
+
+## Preview:
+
+<img src="./frontend/assets/samplePicture.png" width='500'>
 
 ## Planned Features
 
