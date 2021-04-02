@@ -1,13 +1,16 @@
+import { Dispatch, SetStateAction } from 'react';
+
 import { Autocomplete } from '@material-ui/lab';
 import { TextField } from '@material-ui/core';
 import { Customer } from '../customer.model';
 
 type Props = {
   customerData: Partial<Customer>[];
+  setCustomerName: Dispatch<SetStateAction<string>>;
 };
 
 const CustomerSearchSelect = (props: Props) => {
-  const { customerData } = props;
+  const { customerData, setCustomerName } = props;
 
   return (
     <>
@@ -20,7 +23,12 @@ const CustomerSearchSelect = (props: Props) => {
         }
         style={{ width: 300 }}
         renderInput={(params) => (
-          <TextField {...params} label="Select Customer" variant="outlined" />
+          <TextField
+            {...params}
+            label="Select Customer"
+            variant="outlined"
+            onChange={(e) => setCustomerName(e.target.value)}
+          />
         )}
       />
     </>
