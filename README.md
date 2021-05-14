@@ -12,7 +12,7 @@ The idea is to provide a modern solution that simplifies any and all tasks relat
 
 ## Preview:
 
-<img src="./frontend/assets/samplePicture.png" width='500'>
+<img src="./assets/previews/appPreview.png" width='500'>
 
 ## Planned Features
 
