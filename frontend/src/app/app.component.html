@@ -1,3 +1,28 @@
-<mat-toolbar color="primary" class="shadow-xl">
-  <span class="text-2xl tracking-wider">SAM Application</span>
-</mat-toolbar>
+<!-- container -->
+<div class="flex flex-col w-full h-screen">
+  <!-- Toolbar -->
+  <div
+    class="h-16 w-full bg-primary flex items-center space-x-4 shadow-xl z-50"
+  >
+    <div class="ml-4">
+      <button
+        mat-mini-fab
+        class="focus:outline-none"
+        aria-label="menu toggle button"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+
+    <span class="text-2xl tracking-wider font-bold text-white"
+      >SAM Application</span
+    >
+  </div>
+  <!-- Content -->
+  <div class="flex h-full">
+    <!-- nav content -->
+    <div class="w-48 border-r-2 border-gray-200"><p>NAV</p></div>
+    <!-- main content -->
+    <div class="w-full">CONTENT</div>
+  </div>
+</div>
