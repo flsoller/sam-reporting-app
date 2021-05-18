@@ -3,6 +3,8 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/spec",
+    // emitDecoratorMetadata needed for Jest to work correctly
+    "emitDecoratorMetadata": true,
     "types": [
       "jest"
     ],
