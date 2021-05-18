@@ -1,0 +1,34 @@
+<nav class="flex h-full border-r-2 border-gray-200 z-10" [class]="menuWidth">
+  <div class="mt-2 flex flex-col items-start space-y-2">
+    <!-- customers menu -->
+    <span
+      class="tracking-wide font-bold text-lg text-gray-800 my-2"
+      *ngIf="open"
+      >Customers</span
+    >
+    <a mat-button color="primary">
+      <mat-icon color="primary" class="mr-2">account_box</mat-icon>
+      {{ open ? "View Customers" : "" }}
+    </a>
+    <a mat-button color="primary">
+      <mat-icon color="primary" class="mr-2">person_add</mat-icon>
+      {{ open ? "Add Customer" : "" }}
+    </a>
+
+    <hr />
+    <!-- maintenance menu -->
+    <span
+      class="tracking-wide font-bold text-lg text-gray-800 mt-2"
+      *ngIf="open"
+      >Maintenance</span
+    >
+    <a mat-button color="primary">
+      <mat-icon color="primary" class="mr-2">ballot</mat-icon>
+      {{ open ? "View Reports" : "" }}
+    </a>
+    <a mat-button color="primary">
+      <mat-icon color="primary" class="mr-2">note_add</mat-icon>
+      {{ open ? "New Maintenance" : "" }}
+    </a>
+  </div>
+</nav>
