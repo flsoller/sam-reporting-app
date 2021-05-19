@@ -7,8 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Module imports
 import { SharedModule } from './shared/shared.module';
-import { CustomersModule } from './customers/customers.module';
-import { MaintenanceModule } from './maintenance/maintenance.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,8 +14,6 @@ import { MaintenanceModule } from './maintenance/maintenance.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    CustomersModule,
-    MaintenanceModule,
     SharedModule,
   ],
   providers: [],
