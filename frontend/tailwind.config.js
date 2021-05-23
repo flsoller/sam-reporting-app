@@ -9,6 +9,10 @@ module.exports = {
       colors: {
         primary: "#3F51B5",
       },
+      transitionProperty: {
+        width: "width",
+        spacing: "margin, padding",
+      },
     },
   },
   variants: {
