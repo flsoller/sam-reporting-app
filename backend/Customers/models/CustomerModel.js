@@ -6,7 +6,7 @@ const customerSchema = new mongoose.Schema({
     required: [true, 'Customer name is required.'],
   },
   customerAddress: {
-    address: {
+    streetAddress: {
       type: String,
       required: [true, 'Customer address is required.'],
     },
