@@ -17,7 +17,7 @@ export class SidenavService {
   toggleMenu() {
     this.open = !this.open;
     this.open === false
-      ? (this.menuWidth = ['w-16', 'p-0'])
+      ? (this.menuWidth = ['w-16', 'py-4'])
       : (this.menuWidth = ['w-56', 'p-4']);
     this.toggleRequest.next(this.menuWidth);
   }

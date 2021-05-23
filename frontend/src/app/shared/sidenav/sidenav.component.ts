@@ -9,6 +9,7 @@ import { SidenavService } from '../services/sidenav.service';
 export class SidenavComponent implements OnInit {
   menuWidth: string[] = [];
   open = true;
+
   constructor(private sidenavService: SidenavService) {}
 
   ngOnInit(): void {
@@ -16,7 +17,13 @@ export class SidenavComponent implements OnInit {
 
     this.sidenavService.toggleRequest.subscribe((width: string[]) => {
       this.menuWidth = width;
-      this.open = !this.open;
+      // Delay open prop to allow transition-width finish before showing conditional text
+      setTimeout(
+        () => {
+          this.open = !this.open;
+        },
+        this.open ? 0 : 300
+      );
     });
   }
 }
