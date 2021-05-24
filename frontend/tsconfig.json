@@ -3,8 +3,6 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
-    // emitDecoratorMetadata needed for Jest to work correctly
-    "emitDecoratorMetadata": true,
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
