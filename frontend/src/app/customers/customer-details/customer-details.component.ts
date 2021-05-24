@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { CustomerApiService } from '../customer-api.service';
 
 @Component({
   selector: 'app-customer-details',
@@ -19,11 +20,14 @@ export class CustomerDetailsComponent implements OnInit {
     customerRef: [''],
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private customerApi: CustomerApiService
+  ) {}
 
   ngOnInit(): void {}
 
   onSubmit() {
-    // HANDLE SUBMIT
+    this.customerApi.newCustomer(this.customerForm.value);
   }
 }

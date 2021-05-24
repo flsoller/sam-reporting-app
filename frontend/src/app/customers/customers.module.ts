@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 
 // Component imports
 import { CustomerDetailsComponent } from './customer-details/customer-details.component';
@@ -22,6 +23,7 @@ import { CustomersRoutingModule } from './customers-routing.module';
     MatFormFieldModule,
     MatInputModule,
     MatCardModule,
+    MatButtonModule,
   ],
 })
 export class CustomersModule {}
