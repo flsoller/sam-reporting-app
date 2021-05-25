@@ -9,6 +9,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // Module imports
 import { SharedModule } from './shared/shared.module';
 
+// Mat imports
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -17,6 +20,7 @@ import { SharedModule } from './shared/shared.module';
     HttpClientModule,
     BrowserAnimationsModule,
     SharedModule,
+    MatSnackBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
