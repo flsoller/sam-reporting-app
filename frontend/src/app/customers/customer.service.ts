@@ -1,11 +1,12 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { Customer } from './models/customer.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CustomerService {
-  customersChanged = new EventEmitter<Customer[]>();
+  customersChanged = new Subject<Customer[]>();
 
   constructor() {}
 
@@ -17,5 +18,6 @@ export class CustomerService {
 
   setCustomers(data: Customer[]) {
     this.customers = data;
+    this.customersChanged.next(this.customers);
   }
 }
