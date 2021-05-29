@@ -14,6 +14,9 @@ import { CustomerDetailsComponent } from './customer-details/customer-details.co
 import { CustomerListComponent } from './customer-list/customer-list.component';
 import { CustomersRoutingModule } from './customers-routing.module';
 
+// Module imports
+import { SharedModule } from '../shared/shared.module';
+
 @NgModule({
   declarations: [CustomerDetailsComponent, CustomerListComponent],
   imports: [
@@ -24,6 +27,7 @@ import { CustomersRoutingModule } from './customers-routing.module';
     MatInputModule,
     MatCardModule,
     MatButtonModule,
+    SharedModule,
   ],
 })
 export class CustomersModule {}
