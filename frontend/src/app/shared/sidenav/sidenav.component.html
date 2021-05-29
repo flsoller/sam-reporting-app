@@ -16,8 +16,12 @@
       {{ open ? "Home" : "" }}
     </a>
     <!-- customers menu -->
-    <span class="tracking-wide font-bold text-lg text-gray-800 my-2">
-      {{ open ? "Customers" : "" }}</span
+    <span
+      class="tracking-wide font-bold text-lg text-gray-800 my-2 {{
+        open ? 'opacity-100' : 'opacity-0'
+      }}"
+    >
+      Customers</span
     >
     <a routerLink="/customers" mat-button color="primary">
       <mat-icon color="primary" class="mr-2">account_box</mat-icon>
@@ -29,9 +33,13 @@
     </a>
 
     <!-- maintenance menu -->
-    <span class="tracking-wide font-bold text-lg text-gray-800 mt-2">{{
-      open ? "Maintenance" : ""
-    }}</span>
+    <span
+      class="tracking-wide font-bold text-lg text-gray-800 my-2 {{
+        open ? 'opacity-100' : 'opacity-0'
+      }}"
+    >
+      Maintenance</span
+    >
     <a mat-button color="primary">
       <mat-icon color="primary" class="mr-2">ballot</mat-icon>
       {{ open ? "View Reports" : "" }}
