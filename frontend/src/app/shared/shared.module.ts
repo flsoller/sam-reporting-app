@@ -9,10 +9,11 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 // Material imports
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { TableHeaderComponent } from './components/table-header/table-header.component';
 
 @NgModule({
-  declarations: [ToolbarComponent, SidenavComponent],
-  exports: [ToolbarComponent, SidenavComponent],
+  declarations: [ToolbarComponent, SidenavComponent, TableHeaderComponent],
+  exports: [ToolbarComponent, SidenavComponent, TableHeaderComponent],
   imports: [CommonModule, RouterModule, MatButtonModule, MatIconModule],
 })
 export class SharedModule {}
