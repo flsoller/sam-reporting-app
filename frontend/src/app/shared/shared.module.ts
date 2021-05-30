@@ -10,10 +10,21 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { TableHeaderComponent } from './components/table-header/table-header.component';
+import { TableCellComponent } from './components/table-cell/table-cell.component';
 
 @NgModule({
-  declarations: [ToolbarComponent, SidenavComponent, TableHeaderComponent],
-  exports: [ToolbarComponent, SidenavComponent, TableHeaderComponent],
+  declarations: [
+    ToolbarComponent,
+    SidenavComponent,
+    TableHeaderComponent,
+    TableCellComponent,
+  ],
+  exports: [
+    ToolbarComponent,
+    SidenavComponent,
+    TableHeaderComponent,
+    TableCellComponent,
+  ],
   imports: [CommonModule, RouterModule, MatButtonModule, MatIconModule],
 })
 export class SharedModule {}
