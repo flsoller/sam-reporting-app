@@ -47,7 +47,7 @@ export class CustomerApiService {
     const existsError = 'Customer already exsists';
     let errMsg = 'Something went wrong';
 
-    if (errorResponse.error.message.split(':')[0] === validationError) {
+    if (errorResponse.error.message?.split(':')[0] === validationError) {
       errMsg = 'Please fill out all required fields.';
     }
 
