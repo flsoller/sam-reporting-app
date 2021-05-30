@@ -17,6 +17,13 @@ const routes: Routes = [
         (module) => module.CustomersModule
       ),
   },
+  {
+    path: 'maintenance',
+    loadChildren: () =>
+      import('./maintenance/maintenance.module').then(
+        (module) => module.MaintenanceModule
+      ),
+  },
 ];
 
 @NgModule({
