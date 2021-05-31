@@ -1,1 +1,43 @@
-<p>customer-list: Displays all customers</p>
+<div class="flex flex-col p-0 md:p-4">
+  <div class="shadow border-b border-gray-200 sm:rounded-lg overflow-x-scroll">
+    <table class="divide-y divide-gray-200 w-full">
+      <thead
+        class="bg-gray-100"
+        app-table-header
+        [columns]="['Customer', 'City', 'Street', 'Country']"
+        [hasBtnCol]="true"
+      ></thead>
+      <tbody class="bg-white divide-y divide-gray-200">
+        <tr *ngFor="let customer of customers">
+          <!-- name cell -->
+          <td
+            app-table-cell
+            [data]="customer.customerName"
+            [leadingCell]="true"
+          ></td>
+
+          <!-- city cell -->
+          <td app-table-cell [data]="customer.customerAddress.city"></td>
+
+          <!-- street cell -->
+          <td
+            app-table-cell
+            [data]="customer.customerAddress.streetAddress"
+          ></td>
+
+          <!-- country cell -->
+          <td app-table-cell [data]="customer.customerAddress.country"></td>
+
+          <!-- detail button cell -->
+          <td
+            class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
+          >
+            <a href="#" class="text-indigo-600 hover:text-indigo-900"
+              >Details</a
+            >
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
