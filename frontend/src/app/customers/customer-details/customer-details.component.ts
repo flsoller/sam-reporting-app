@@ -10,6 +10,7 @@ import { CustomerApiService } from '../customer-api.service';
 })
 export class CustomerDetailsComponent implements OnInit {
   submitDisabled = false;
+  isEdit = false;
 
   customerForm = this.fb.group({
     customerName: [''],
@@ -35,6 +36,7 @@ export class CustomerDetailsComponent implements OnInit {
     this.customerApi.newCustomer(this.customerForm.value).subscribe((res) => {
       this.snackBarService.showSnackBar(res.message);
       this.customerForm.reset();
+      this.customerApi.getCustomers();
     });
   }
 }
