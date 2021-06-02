@@ -1,18 +1,18 @@
-enum gasUnit {
+export enum GasUnit {
   LEL = '%LEL',
-  PPM = 'ppm',
+  PPM = 'PPM',
   VOL = '%Vol',
 }
 
 export interface Sensor {
   calGasName: string;
   calGasConc: number;
-  calGasUnit: gasUnit;
+  calGasUnit: GasUnit;
   refGas?: {
     isUsed: boolean;
     refGasName: string;
     refGasConc: number;
-    refGasUnit: gasUnit;
+    refGasUnit: GasUnit;
   };
   alarmLvls: {
     alarmOne?: number;
