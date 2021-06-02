@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Component imports
 import { MaintenanceStartComponent } from './maintenance-start/maintenance-start.component';
@@ -15,6 +15,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -25,11 +27,14 @@ import { MatButtonModule } from '@angular/material/button';
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    FormsModule,
     MatSelectModule,
     MatFormFieldModule,
     MaintenanceRouterModule,
     MatInputModule,
     MatButtonModule,
+    MatCheckboxModule,
+    MatExpansionModule,
   ],
 })
 export class MaintenanceModule {}
