@@ -1,0 +1,61 @@
+<form [formGroup]="sensorData" (ngSubmit)="onSubmit()" autocomplete="off">
+  <div class="max-w-2xl mx-auto">
+    <!-- Cal gas values -->
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Calibration Data </mat-panel-title>
+        <mat-panel-description> </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="space-x-2">
+        <mat-form-field appearance="outline">
+          <mat-label>Calibration Gas</mat-label>
+          <input matInput formControlName="calGasName" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Concentration</mat-label>
+          <input matInput formControlName="calGasConc" type="number" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Unit</mat-label>
+          <mat-select formControlName="calGasUnit">
+            <mat-option *ngFor="let unit of gasUnit" [value]="unit">{{
+              unit
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <!-- Ref gas values (if true) -->
+      <div formGroupName="refGas">
+        <mat-checkbox [(ngModel)]="refGas" formControlName="isUsed"
+          >Reference Gas</mat-checkbox
+        >
+        <!-- Ref gas data -->
+        <div *ngIf="refGas">
+          <div class="space-x-2">
+            <mat-form-field appearance="outline">
+              <mat-label>Reference Gas</mat-label>
+              <input matInput formControlName="refGasName" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Concentration</mat-label>
+              <input matInput formControlName="refGasConc" type="number" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Unit</mat-label>
+              <mat-select formControlName="calGasUnit">
+                <mat-option *ngFor="let unit of gasUnit" [value]="unit">{{
+                  unit
+                }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </div>
+</form>
