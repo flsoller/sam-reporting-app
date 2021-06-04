@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 // Component imports
 import { MaintenanceStartComponent } from './maintenance-start/maintenance-start.component';
@@ -27,7 +27,6 @@ import { MatExpansionModule } from '@angular/material/expansion';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    FormsModule,
     MatSelectModule,
     MatFormFieldModule,
     MaintenanceRouterModule,

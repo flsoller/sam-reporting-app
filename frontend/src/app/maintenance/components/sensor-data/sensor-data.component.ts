@@ -27,12 +27,10 @@ export class SensorDataComponent implements OnInit {
     alarmLvls: this.fb.group({
       alarmOne: [],
       alarmTwo: [],
-      alarmThree: [],
-      alarmFour: [],
-      additional: this.fb.group({
-        stel: [],
-        twa: [],
-      }),
+      // alarmThree: [], Optional display for fixed instruments
+      // alarmFour: [], Optional display for fixed instruments
+      stel: [],
+      twa: [],
     }),
   });
 
@@ -42,5 +40,9 @@ export class SensorDataComponent implements OnInit {
 
   onSubmit() {
     console.log(this.sensorData.value);
+  }
+
+  onToggleRefGas() {
+    this.refGas = !this.refGas;
   }
 }
