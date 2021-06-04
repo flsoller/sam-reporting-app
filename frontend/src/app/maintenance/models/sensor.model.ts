@@ -5,6 +5,7 @@ export enum GasUnit {
 }
 
 export interface Sensor {
+  serialNumber: string;
   calGasName: string;
   calGasConc: number;
   calGasUnit: GasUnit;

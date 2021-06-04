@@ -15,6 +15,7 @@ export class SensorDataComponent implements OnInit {
   gasUnit: GasUnit[] = [GasUnit.LEL, GasUnit.PPM, GasUnit.VOL];
 
   sensorData = this.fb.group({
+    serialNumber: [''],
     calGasName: [''],
     calGasConc: [],
     calGasUnit: [''],
