@@ -17,6 +17,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatButtonModule,
     MatCheckboxModule,
     MatExpansionModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
 })
 export class MaintenanceModule {}
