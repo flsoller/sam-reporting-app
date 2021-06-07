@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-portable-instrument',
@@ -11,6 +11,7 @@ export class PortableInstrumentComponent implements OnInit {
     instrumentName: [''],
     instrumentSerialNumber: [''],
     testDate: [''],
+    sensors: this.fb.array([]),
   });
 
   constructor(private fb: FormBuilder) {}
@@ -18,4 +19,33 @@ export class PortableInstrumentComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit() {}
+
+  get sensors() {
+    return this.instrumentData.get('sensors') as FormArray;
+  }
+
+  onAddSensor() {
+    this.sensors.push(
+      this.fb.group({
+        serialNumber: [''],
+        calGasName: [''],
+        calGasConc: [],
+        calGasUnit: [''],
+        refGas: this.fb.group({
+          isUsed: [false],
+          refGasName: [''],
+          refGasConc: [],
+          refGasUnit: [''],
+        }),
+        alarmLvls: this.fb.group({
+          alarmOne: [],
+          alarmTwo: [],
+          // alarmThree: [], Optional display for fixed instruments
+          // alarmFour: [], Optional display for fixed instruments
+          stel: [],
+          twa: [],
+        }),
+      })
+    );
+  }
 }
