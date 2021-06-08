@@ -18,7 +18,9 @@ export class PortableInstrumentComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onSubmit() {}
+  onSubmit() {
+    console.log(this.instrumentData.value);
+  }
 
   get sensors() {
     return this.instrumentData.get('sensors') as FormArray;
