@@ -1,4 +1,4 @@
-<form [formGroup]="sensorData" (ngSubmit)="onSubmit()" autocomplete="off">
+<form [formGroup]="form" autocomplete="off">
   <div class="max-w-2xl mx-auto">
     <!-- sensor data -->
     <mat-expansion-panel>
@@ -35,7 +35,10 @@
 
       <!-- Ref gas values (if true) -->
       <div formGroupName="refGas" class="space-y-2">
-        <mat-checkbox (click)="onToggleRefGas()" formControlName="isUsed"
+        <mat-checkbox
+          (click)="onToggleRefGas()"
+          (keydown)="onToggleRefGas()"
+          formControlName="isUsed"
           >Reference Gas</mat-checkbox
         >
         <!-- Ref gas data -->
