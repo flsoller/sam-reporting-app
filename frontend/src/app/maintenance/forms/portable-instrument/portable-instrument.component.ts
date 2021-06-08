@@ -33,11 +33,12 @@ export class PortableInstrumentComponent implements OnInit {
         calGasName: [''],
         calGasConc: [],
         calGasUnit: [''],
+        preCal: [],
+        aftCal: [],
         refGas: this.fb.group({
           isUsed: [false],
           refGasName: [''],
           refGasConc: [],
-          refGasUnit: [''],
         }),
         alarmLvls: this.fb.group({
           alarmOne: [],
