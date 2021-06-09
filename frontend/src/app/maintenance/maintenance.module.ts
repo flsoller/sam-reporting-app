@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MaintenanceStartComponent } from './maintenance-start/maintenance-start.component';
 import { PortableInstrumentComponent } from './forms/portable-instrument/portable-instrument.component';
 import { SensorDataComponent } from './components/sensor-data/sensor-data.component';
+import { PortableContainerComponent } from './components/portable-container/portable-container.component';
 
 // App Module imports
 import { MaintenanceRouterModule } from './maintenance-routing.module';
@@ -19,12 +20,14 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
     MaintenanceStartComponent,
     PortableInstrumentComponent,
     SensorDataComponent,
+    PortableContainerComponent,
   ],
   imports: [
     CommonModule,
@@ -38,6 +41,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatExpansionModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatTabsModule,
   ],
 })
 export class MaintenanceModule {}
