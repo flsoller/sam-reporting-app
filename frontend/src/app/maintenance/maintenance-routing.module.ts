@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { MaintenanceStartComponent } from './maintenance-start/maintenance-start.component';
 import { PortableInstrumentComponent } from './forms/portable-instrument/portable-instrument.component';
+import { PortableContainerComponent } from './components/portable-container/portable-container.component';
 
 const maintenanceRoutes: Routes = [
   {
@@ -11,8 +12,8 @@ const maintenanceRoutes: Routes = [
     children: [],
   },
   {
-    path: 'portable',
-    component: PortableInstrumentComponent,
+    path: 'portable/:id',
+    component: PortableContainerComponent,
   },
 ];
 

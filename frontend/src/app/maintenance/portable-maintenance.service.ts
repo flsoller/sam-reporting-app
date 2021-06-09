@@ -10,7 +10,7 @@ import { PortableUnit } from './models/portable.model';
 export class PortableMaintenanceService {
   maintenanceData: PortableMaintenance[] = [];
 
-  createNew(customer: string) {
+  createNew(customer: string): string {
     this.maintenanceData.push({
       jobID: uuidv4(),
       customer: customer,
@@ -18,8 +18,12 @@ export class PortableMaintenanceService {
     });
 
     // Logging
-    console.log(`Maintenance created with data:`);
-    console.log(this.maintenanceData[0]);
+    console.log(`Maintenance created with id:`);
+    console.log(this.maintenanceData[this.maintenanceData.length - 1].jobID);
+
+    // Return id of added maintenance for router
+    let id = this.maintenanceData[this.maintenanceData.length - 1].jobID;
+    return id;
   }
 
   updateData(id: string, instrumentsData: PortableUnit[]) {
