@@ -10,6 +10,13 @@ import { PortableUnit } from './models/portable.model';
 export class PortableMaintenanceService {
   maintenanceData: PortableMaintenance[] = [];
 
+  getDataById(jobId: string): PortableMaintenance {
+    let data = this.maintenanceData.filter(
+      (maintenance) => maintenance.jobID === jobId
+    )[0];
+    return data;
+  }
+
   createNew(customer: string): string {
     this.maintenanceData.push({
       jobID: uuidv4(),
