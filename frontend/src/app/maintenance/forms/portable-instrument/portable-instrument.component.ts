@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder } from '@angular/forms';
 
 @Component({
@@ -7,23 +7,14 @@ import { FormArray, FormBuilder } from '@angular/forms';
   styleUrls: ['./portable-instrument.component.scss'],
 })
 export class PortableInstrumentComponent implements OnInit {
-  instrumentData = this.fb.group({
-    instrumentName: [''],
-    instrumentSerialNumber: [''],
-    testDate: [''],
-    sensors: this.fb.array([]),
-  });
+  @Input() instrumentForm: any;
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {}
 
-  onSubmit() {
-    console.log(this.instrumentData.value);
-  }
-
   get sensors() {
-    return this.instrumentData.get('sensors') as FormArray;
+    return this.instrumentForm.get('sensors') as FormArray;
   }
 
   onAddSensor() {
