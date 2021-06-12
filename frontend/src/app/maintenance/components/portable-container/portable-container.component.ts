@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormArray, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { PortableMaintenance } from '../../models/portable-maintenance.model';
@@ -20,9 +21,14 @@ export class PortableContainerComponent implements OnInit, OnDestroy {
     instruments: [],
   };
 
+  instrumentForm = this.fb.group({
+    instruments: this.fb.array([]),
+  });
+
   constructor(
     private route: ActivatedRoute,
-    private portableMaintenanceService: PortableMaintenanceService
+    private portableMaintenanceService: PortableMaintenanceService,
+    private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
@@ -37,6 +43,26 @@ export class PortableContainerComponent implements OnInit, OnDestroy {
         this.maintenanceId
       );
     }
+  }
+
+  get instruments() {
+    return this.instrumentForm.get('instruments') as FormArray;
+  }
+
+  onAddInstrument() {
+    this.instruments.push(
+      this.fb.group({
+        instrumentName: [''],
+        instrumentSerialNumber: [''],
+        testDate: [''],
+        sensors: this.fb.array([]),
+      })
+    );
+  }
+
+  onSubmitMaintenance() {
+    this.maintenanceData.instruments = this.instrumentForm.value;
+    console.log(this.maintenanceData);
   }
 
   ngOnDestroy(): void {
