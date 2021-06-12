@@ -1,6 +1,20 @@
 <mat-tab-group>
-  <mat-tab [label]="'Overview'"> </mat-tab>
-  <mat-tab *ngFor="let instrument of maintenanceData.instruments">
-    <app-portable-instrument></app-portable-instrument>
+  <mat-tab [label]="'Overview'">
+    <div class="flex justify-center space-x-2 mt-8">
+      <button mat-raised-button color="primary" (click)="onAddInstrument()">
+        Add Instrument
+      </button>
+      <button mat-raised-button color="primary" (click)="onSubmitMaintenance()">
+        Submit Maintenance
+      </button>
+    </div>
+  </mat-tab>
+  <mat-tab
+    *ngFor="let instrument of instruments.controls; let i = index"
+    [label]="instrument.get('instrumentSerialNumber')?.value || 'New Unit'"
+  >
+    <app-portable-instrument
+      [instrumentForm]="instrument"
+    ></app-portable-instrument>
   </mat-tab>
 </mat-tab-group>
