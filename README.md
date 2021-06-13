@@ -14,6 +14,11 @@ The idea is to provide a modern solution that simplifies any and all tasks relat
 
 <img src="./assets/previews/appPreview.png" width='500'>
 
+## Technologies:
+
+- Frontend: Angular, Angular Material, TailwindCSS, Jest
+- Backend: NodeJS, Express, Mongoose, MongoDB, Pdfkit
+
 ## Planned Features
 
 Initially:
