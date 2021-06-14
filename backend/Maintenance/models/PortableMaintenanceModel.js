@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import PortableInstrumentModel from './PortableInstrumentModel';
+import PortableInstrumentModel from './PortableInstrumentModel.js';
 
 const PortableMaintenanceModelSchema = new mongoose.Schema({
   jobID: String,

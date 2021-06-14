@@ -1,14 +1,11 @@
 import mongoose from 'mongoose';
-import SensorModel from './SensorModel';
+import SensorModel from './SensorModel.js';
 
 const PortableInstrumentModelSchema = new mongoose.Schema({
   instrumentName: String,
-  serialNumber: String,
+  instrumentSerialNumber: String,
   testDate: Date,
-  sensorData: [SensorModel],
+  sensors: [SensorModel],
 });
 
-export default mongoose.model(
-  'PortableInstrumentModel',
-  PortableInstrumentModelSchema
-);
+export default PortableInstrumentModelSchema;
