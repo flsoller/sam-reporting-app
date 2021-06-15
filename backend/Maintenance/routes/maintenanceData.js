@@ -2,15 +2,12 @@
 import express from 'express';
 
 // Controller imports
-import {
-  getMaintenanceData,
-  addMaintenanceData,
-} from '../controllers/maintenanceData.js';
+import { addPortableMaintenanceData } from '../controllers/maintenanceData.js';
 
 // Initialize router
 const router = express.Router();
 
 // Route definitions
-router.route('/').get(getMaintenanceData).post(addMaintenanceData);
+router.route('/portable').post(addPortableMaintenanceData);
 
 export default router;
