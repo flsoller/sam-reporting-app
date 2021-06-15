@@ -2,6 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { SnackBarService } from 'src/app/shared/services/snackbar.service';
+import { MaintenanceApiService } from '../../maintenance-api.service';
 import { PortableMaintenance } from '../../models/portable-maintenance.model';
 import { PortableMaintenanceService } from '../../portable-maintenance.service';
 
@@ -28,6 +30,8 @@ export class PortableContainerComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private portableMaintenanceService: PortableMaintenanceService,
+    private maintenanceApiService: MaintenanceApiService,
+    private snackbarService: SnackBarService,
     private fb: FormBuilder
   ) {}
 
@@ -61,8 +65,12 @@ export class PortableContainerComponent implements OnInit, OnDestroy {
   }
 
   onSubmitMaintenance() {
-    this.maintenanceData.instruments = this.instrumentForm.value;
-    console.log(this.maintenanceData);
+    this.maintenanceData.instruments = this.instruments.value;
+    this.maintenanceApiService
+      .addPortableMaintenance(this.maintenanceData)
+      .subscribe((res) => {
+        this.snackbarService.showSnackBar(res.message);
+      });
   }
 
   ngOnDestroy(): void {

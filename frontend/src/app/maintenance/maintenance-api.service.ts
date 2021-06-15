@@ -15,6 +15,6 @@ export class MaintenanceApiService {
   constructor(private http: HttpClient) {}
 
   addPortableMaintenance(data: PortableMaintenance) {
-    return this.http.post<NewMaintenanceRes>(this.baseUrl, data);
+    return this.http.post<NewMaintenanceRes>(`${this.baseUrl}/portable`, data);
   }
 }
