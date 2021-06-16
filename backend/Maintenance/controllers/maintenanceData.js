@@ -1,3 +1,5 @@
+import asyncHandler from '../../middleware/asyncHandler.js';
+
 import PortableMaintenanceModel from '../models/PortableMaintenanceModel.js';
 
 // @desc    Get all maintenance db entries
@@ -16,15 +18,17 @@ import PortableMaintenanceModel from '../models/PortableMaintenanceModel.js';
 // @desc    Create new entry for maintenance data document (portableInstruments)
 // @route   POST /api/v1/maintenance-data/portable
 // @access  Private
-export const addPortableMaintenanceData = async (req, res, next) => {
-  const portableData = await PortableMaintenanceModel.create(req.body);
+export const addPortableMaintenanceData = asyncHandler(
+  async (req, res, next) => {
+    const portableData = await PortableMaintenanceModel.create(req.body);
 
-  try {
-    res.status(200).json({
-      success: true,
-      message: 'Maintenance data saved.',
-    });
-  } catch (error) {
-    console.log(error);
+    if (portableData) {
+      res.status(201).json({
+        success: true,
+        message: 'Maintenance data saved.',
+      });
+    } else {
+      throw new Error('Invalid maintenance data');
+    }
   }
-};
+);
