@@ -8,6 +8,6 @@ const PortableMaintenanceModelSchema = new mongoose.Schema({
 });
 
 export default mongoose.model(
-  'PortableMaintenanceModel',
+  'PortableMaintenance',
   PortableMaintenanceModelSchema
 );
