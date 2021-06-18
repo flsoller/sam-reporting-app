@@ -34,6 +34,7 @@
   >
     <div class="p-4">
       <app-sensor-data
+        [index]="i"
         [form]="sensor"
         (deleteRequest)="removeSensor($event)"
       ></app-sensor-data>
