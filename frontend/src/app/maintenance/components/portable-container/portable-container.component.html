@@ -16,5 +16,10 @@
     <app-portable-instrument
       [instrumentForm]="instrument"
     ></app-portable-instrument>
+    <div class="flex justify-end p-12">
+      <button mat-raised-button color="warn" (click)="onRemoveInstrument(i)">
+        Remove Unit
+      </button>
+    </div>
   </mat-tab>
 </mat-tab-group>

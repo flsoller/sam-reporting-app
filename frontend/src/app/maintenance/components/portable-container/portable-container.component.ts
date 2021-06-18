@@ -64,6 +64,10 @@ export class PortableContainerComponent implements OnInit, OnDestroy {
     );
   }
 
+  onRemoveInstrument(index: number) {
+    this.instruments.removeAt(index);
+  }
+
   onSubmitMaintenance() {
     this.maintenanceData.instruments = this.instruments.value;
     this.maintenanceApiService
