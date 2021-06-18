@@ -33,7 +33,10 @@
     formArrayName="sensors"
   >
     <div class="p-4">
-      <app-sensor-data [form]="sensor"></app-sensor-data>
+      <app-sensor-data
+        [form]="sensor"
+        (deleteRequest)="removeSensor($event)"
+      ></app-sensor-data>
     </div>
   </ng-container>
 </form>

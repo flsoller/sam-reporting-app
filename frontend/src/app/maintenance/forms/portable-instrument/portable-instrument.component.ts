@@ -42,4 +42,8 @@ export class PortableInstrumentComponent implements OnInit {
       })
     );
   }
+
+  removeSensor(index: number) {
+    this.sensors.removeAt(index);
+  }
 }
