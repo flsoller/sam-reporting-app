@@ -1,1 +1,16 @@
-<p>maintenance-overview works!</p>
+<form [formGroup]="searchForm">
+  <div class="max-w-lg mx-auto p-8">
+    <div class="flex flex-col">
+      <mat-form-field appearance="outline">
+        <mat-label>Select Customer</mat-label>
+        <mat-select formControlName="customer">
+          <mat-option
+            *ngFor="let customer of customers"
+            [value]="customer.customerName"
+            >{{ customer.customerName }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+</form>
