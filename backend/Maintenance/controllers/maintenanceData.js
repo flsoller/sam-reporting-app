@@ -25,13 +25,13 @@ export const addPortableMaintenanceData = asyncHandler(
 // @access  Private
 export const getPortableMaintDataByCustomer = asyncHandler(
   async (req, res, next) => {
-    const { customerName } = req.body;
+    const customer = req.params.customer;
 
-    const portableMaintenance = await PortableMaintenanceModel.findOne({
-      customerName,
+    const portableMaintenance = await PortableMaintenanceModel.find({
+      customer: customer,
     });
 
-    if (portableMaintenance) {
+    if (portableMaintenance.length >= 1) {
       res.status(200).json(portableMaintenance);
     } else {
       res.status(400);
