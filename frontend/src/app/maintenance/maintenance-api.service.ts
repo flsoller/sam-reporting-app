@@ -17,4 +17,10 @@ export class MaintenanceApiService {
   addPortableMaintenance(data: PortableMaintenance) {
     return this.http.post<NewMaintenanceRes>(`${this.baseUrl}/portable`, data);
   }
+
+  getMaintenanceByCustomer(customer: string) {
+    return this.http.get<PortableMaintenance[]>(
+      `${this.baseUrl}/portable/${customer}`
+    );
+  }
 }
