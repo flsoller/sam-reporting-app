@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MatOptionSelectionChange } from '@angular/material/core';
 import { CustomerService } from 'src/app/customers/customer.service';
 import { Customer } from 'src/app/customers/models/customer.model';
+import { MaintenanceApiService } from '../maintenance-api.service';
+import { PortableMaintenance } from '../models/portable-maintenance.model';
 
 @Component({
   selector: 'app-maintenance-overview',
@@ -14,13 +17,25 @@ export class MaintenanceOverviewComponent implements OnInit {
   });
 
   customers: Customer[] = [];
+  maintenanceData: PortableMaintenance[] = [];
 
   constructor(
     private fb: FormBuilder,
-    private customerService: CustomerService
+    private customerService: CustomerService,
+    private maintenanceApi: MaintenanceApiService
   ) {}
 
   ngOnInit(): void {
     this.customers = this.customerService.getCustomers();
+  }
+
+  setMaintenanceData(event: MatOptionSelectionChange) {
+    if (event.source.selected) {
+      this.maintenanceApi
+        .getMaintenanceByCustomer(event.source.value)
+        .subscribe((data) => {
+          this.maintenanceData = data;
+        });
+    }
   }
 }
