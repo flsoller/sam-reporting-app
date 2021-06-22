@@ -1,5 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { SnackBarService } from '../shared/services/snackbar.service';
 import { PortableMaintenance } from './models/portable-maintenance.model';
 
 export interface NewMaintenanceRes {
@@ -12,15 +15,32 @@ export interface NewMaintenanceRes {
 export class MaintenanceApiService {
   baseUrl = '/api/v1/maintenance-data';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private snackBar: SnackBarService) {}
 
   addPortableMaintenance(data: PortableMaintenance) {
     return this.http.post<NewMaintenanceRes>(`${this.baseUrl}/portable`, data);
   }
 
   getMaintenanceByCustomer(customer: string) {
-    return this.http.get<PortableMaintenance[]>(
-      `${this.baseUrl}/portable/${customer}`
-    );
+    return this.http
+      .get<PortableMaintenance[]>(`${this.baseUrl}/portable/${customer}`)
+      .pipe(catchError(this.handleError.bind(this)));
+  }
+
+  //
+  // ERROR HANDLING
+  //
+
+  private handleError(errorResponse: HttpErrorResponse) {
+    const noDataError = 'No data available.';
+    let errMsg = 'Something went wrong.';
+
+    if (errorResponse.error.message === noDataError) {
+      errMsg = noDataError;
+    }
+
+    this.snackBar.showSnackBar(errMsg, 'error-snackbar');
+
+    return throwError(errMsg);
   }
 }
