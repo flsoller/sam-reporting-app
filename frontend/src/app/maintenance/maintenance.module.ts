@@ -22,6 +22,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MaintenanceOverviewComponent } from './maintenance-overview/maintenance-overview.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { MaintenanceOverviewComponent } from './maintenance-overview/maintenance
   ],
   imports: [
     CommonModule,
+    SharedModule,
     ReactiveFormsModule,
     MatSelectModule,
     MatFormFieldModule,

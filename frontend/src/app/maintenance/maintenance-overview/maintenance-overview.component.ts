@@ -33,6 +33,7 @@ export class MaintenanceOverviewComponent implements OnInit {
 
   setMaintenanceData(event: MatOptionSelectionChange) {
     if (event.source.selected) {
+      this.maintenanceData = []
       this.maintenanceApi
         .getMaintenanceByCustomer(event.source.value)
         .subscribe((data) => {
