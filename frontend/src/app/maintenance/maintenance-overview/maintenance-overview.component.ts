@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MatOptionSelectionChange } from '@angular/material/core';
 import { CustomerService } from 'src/app/customers/customer.service';
 import { Customer } from 'src/app/customers/models/customer.model';
+import { SnackBarService } from 'src/app/shared/services/snackbar.service';
 import { MaintenanceApiService } from '../maintenance-api.service';
 import { PortableMaintenance } from '../models/portable-maintenance.model';
 
@@ -22,7 +23,8 @@ export class MaintenanceOverviewComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private customerService: CustomerService,
-    private maintenanceApi: MaintenanceApiService
+    private maintenanceApi: MaintenanceApiService,
+    private snackBar: SnackBarService,
   ) {}
 
   ngOnInit(): void {
@@ -35,6 +37,7 @@ export class MaintenanceOverviewComponent implements OnInit {
         .getMaintenanceByCustomer(event.source.value)
         .subscribe((data) => {
           this.maintenanceData = data;
+          this.snackBar.showSnackBar(`Data loaded for customer: ${data[0].customer}`)
         });
     }
   }
