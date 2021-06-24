@@ -1,12 +1,17 @@
-import { generateReport } from '../templates/sampleReport.js';
+import asyncHandler from '../../middleware/asyncHandler.js';
+import { generateReport } from '../templates/portableInstrument.js';
 
-// @desc    Generate and return PDF report.
-// @route   GET /api/v1/generate-pdf/:id
+import PortableMaintenanceModel from '../../Maintenance/models/PortableMaintenanceModel.js';
+
+// @desc    Generate and return PDF report for portable maintenance.
+// @route   GET /api/v1/reports/portable/:jobId
 // @access  Private
-// const getReport = async (req, res, next) => {
-//   const data = await SampleModel.findById(req.params.id);
+export const getPortableReport = asyncHandler(async (req, res, next) => {
+  const jobId = req.params.jobId;
 
-//   generateReport(res, data);
-// };
+  const portableMaintenance = await PortableMaintenanceModel.find({
+    jobId: jobId,
+  });
 
-// export { getReport };
+  generateReport(res, portableMaintenance);
+});
