@@ -1,13 +1,14 @@
 import PDFDocument from 'pdfkit';
 
+import { createHeader, createFooter } from './reportBuilder.js';
+
 export const generateReport = (res, data) => {
-  const doc = new PDFDocument();
+  const doc = new PDFDocument({ size: 'A4', margin: 25 });
 
   doc.pipe(res);
 
-  doc.text(
-    'This is a placeholder text. Portable device maintenance report to follow.'
-  );
+  createHeader(doc);
+  createFooter(doc);
 
   doc.end();
 };
