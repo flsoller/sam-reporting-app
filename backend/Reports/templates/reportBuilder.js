@@ -3,15 +3,35 @@
 // in a report template.
 //
 
-export function createHeader(doc) {
+// Universal page header
+export function createHeader(doc, instrumentName) {
   doc
     .rect(0, 0, 595.28, 80)
     .fill('gray')
-    .fillColor('white')
+    .fillColor('black')
+    .fontSize(20)
+    .text('Instrument Protocol', 25, 18)
+    .moveTo(0, 40)
+    .lineTo(340, 40)
+    .stroke()
     .fontSize(18)
-    .text('MSA - The Safety Company', 0, 35, { align: 'right' });
+    .font('Helvetica-Bold')
+    .text(`${instrumentName || 'Not Provided'}`, 25, 50);
 }
 
-export function createFooter(doc) {
-  doc.rect(0, 761.89, 595.28, 80).fill('gray');
+// Universal page footer
+export function createFooter(doc, technicianName) {
+  doc
+    .rect(0, 761.89, 595.28, 80)
+    .fill('gray')
+    .moveTo(595, 815.89)
+    .lineTo(400, 815.89)
+    .stroke()
+    .fill('black')
+    .fontSize(16)
+    .font('Helvetica')
+    .text('MSAsafety.com', 430, 797)
+    .fontSize(10)
+    .text('Maintenance done by:', 25, 780)
+    .text(`${technicianName || 'MSA Technician'}`, 25, 795);
 }
