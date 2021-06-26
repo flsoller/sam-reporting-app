@@ -21,7 +21,7 @@ export const addPortableMaintenanceData = asyncHandler(
 );
 
 // @desc    Get all portable maintenance entries for specific customer
-// @route   GET /api/v1/maintenance-data/portable/
+// @route   GET /api/v1/maintenance-data/portable/<<customer>>
 // @access  Private
 export const getPortableMaintDataByCustomer = asyncHandler(
   async (req, res, next) => {
@@ -29,6 +29,26 @@ export const getPortableMaintDataByCustomer = asyncHandler(
 
     const portableMaintenance = await PortableMaintenanceModel.find({
       customer: customer,
+    });
+
+    if (portableMaintenance.length >= 1) {
+      res.status(200).json(portableMaintenance);
+    } else {
+      res.status(400);
+      throw new Error('No data available.');
+    }
+  }
+);
+
+// @desc    Get all portable maintenance entries for specific customer
+// @route   GET /api/v1/maintenance-data/portable/id/<<jobId>>
+// @access  Private
+export const getPortableMaintDataByJobId = asyncHandler(
+  async (req, res, next) => {
+    const jobId = req.params.jobId;
+
+    const portableMaintenance = await PortableMaintenanceModel.find({
+      jobID: jobId,
     });
 
     if (portableMaintenance.length >= 1) {
