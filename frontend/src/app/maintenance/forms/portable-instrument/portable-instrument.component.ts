@@ -24,6 +24,8 @@ export class PortableInstrumentComponent implements OnInit {
         calGasName: [''],
         calGasConc: [],
         calGasUnit: [''],
+        preZero: [],
+        aftZero: [],
         preCal: [],
         aftCal: [],
         refGas: this.fb.group({
