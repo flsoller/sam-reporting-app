@@ -9,6 +9,10 @@ const SensorModelSchema = new mongoose.Schema(
       type: String,
       enum: ['%LEL', 'PPM', '%Vol'],
     },
+    preZero: Number,
+    aftZero: Number,
+    preCal: Number,
+    aftCal: Number,
     refGas: {
       isUsed: Boolean,
       refGasName: String,

@@ -9,6 +9,10 @@ export interface Sensor {
   calGasName: string;
   calGasConc: number;
   calGasUnit: GasUnit;
+  preZero: number;
+  aftZero: number;
+  preCal: number;
+  aftCal: number;
   refGas?: {
     isUsed: boolean;
     refGasName: string;
