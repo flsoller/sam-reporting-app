@@ -40,7 +40,7 @@ export const getPortableMaintDataByCustomer = asyncHandler(
   }
 );
 
-// @desc    Get all portable maintenance entries for specific customer
+// @desc    Get portable maintenance data by jobId
 // @route   GET /api/v1/maintenance-data/portable/id/<<jobId>>
 // @access  Private
 export const getPortableMaintDataByJobId = asyncHandler(
