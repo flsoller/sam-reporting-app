@@ -17,6 +17,10 @@ const maintenanceRoutes: Routes = [
     component: PortableContainerComponent,
   },
   {
+    path: 'portable/:id/:edit',
+    component: PortableContainerComponent,
+  },
+  {
     path: 'overview',
     component: MaintenanceOverviewComponent,
   },
