@@ -29,7 +29,7 @@ export class MaintenanceApiService {
 
   getMaintenanceById(id: string) {
     return this.http
-      .get<PortableMaintenance>(`${this.baseUrl}/portable/id/${id}`)
+      .get<PortableMaintenance[]>(`${this.baseUrl}/portable/id/${id}`)
       .pipe(catchError(this.handleError.bind(this)));
   }
 

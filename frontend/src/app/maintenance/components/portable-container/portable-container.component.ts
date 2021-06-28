@@ -14,6 +14,7 @@ import { PortableMaintenanceService } from '../../portable-maintenance.service';
 })
 export class PortableContainerComponent implements OnInit, OnDestroy {
   maintenanceId: string | null = '';
+  editMode = false;
 
   paramSub: Subscription = new Subscription();
 
@@ -38,6 +39,11 @@ export class PortableContainerComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.paramSub = this.route.paramMap.subscribe((param) => {
       this.maintenanceId = param.get('id');
+      this.editMode = param.get('edit') === 'edit' ? true : false;
+
+      if (this.editMode) {
+        this.initForm();
+      }
     });
 
     // Only gets data once on init for now.
@@ -51,6 +57,23 @@ export class PortableContainerComponent implements OnInit, OnDestroy {
 
   get instruments() {
     return this.instrumentForm.get('instruments') as FormArray;
+  }
+
+  private initForm() {
+    this.maintenanceApiService
+      .getMaintenanceById(this.maintenanceId || '')
+      .subscribe((data) => {
+        console.log(data);
+
+        for (let instrument of data[0].instruments) {
+          this.instruments.push(
+            this.fb.group({
+              ...instrument,
+              sensors: this.fb.array([]),
+            })
+          );
+        }
+      });
   }
 
   onAddInstrument() {
