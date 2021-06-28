@@ -30,25 +30,35 @@
           <!-- date cell -->
           <td
             app-table-cell
-            [data]="maintenance.instruments[0].testDate.toString().split('T')[0]"
+            [data]="
+              maintenance.instruments[0].testDate.toString().split('T')[0]
+            "
             [leadingCell]="true"
           ></td>
 
           <!-- num units cell -->
-          <td app-table-cell [data]="maintenance.instruments.length.toString()"></td>
+          <td
+            app-table-cell
+            [data]="maintenance.instruments.length.toString()"
+          ></td>
 
           <!-- detail button cell -->
           <td
             class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
           >
-            <a href="#" class="text-indigo-600 hover:text-indigo-900"
+            <a
+              [routerLink]="
+                '/maintenance/portable/' + maintenance.jobID + '/edit'
+              "
+              class="text-indigo-600 hover:text-indigo-900"
               >Details</a
             >
           </td>
         </tr>
-        <tr *ngIf="maintenanceData.length === 0"><td app-table-cell [data]="'No data available'"></td></tr>
+        <tr *ngIf="maintenanceData.length === 0">
+          <td app-table-cell [data]="'No data available'"></td>
+        </tr>
       </tbody>
     </table>
   </div>
 </div>
-
