@@ -6,7 +6,7 @@ const PortableInstrumentModelSchema = new mongoose.Schema(
     instrumentName: String,
     instrumentSerialNumber: String,
     testDate: Date,
-    sensors: [SensorModel],
+    sensorData: [SensorModel],
   },
   { _id: false }
 );
