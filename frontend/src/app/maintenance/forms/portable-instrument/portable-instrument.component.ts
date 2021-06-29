@@ -8,17 +8,19 @@ import { FormArray, FormBuilder } from '@angular/forms';
 })
 export class PortableInstrumentComponent implements OnInit {
   @Input() instrumentForm: any;
+  @Input() preloadedSensorData: any;
+  @Input() isEdit = false;
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {}
 
-  get sensors() {
-    return this.instrumentForm.get('sensors') as FormArray;
+  get sensorData() {
+    return this.instrumentForm.get('sensorData') as FormArray;
   }
 
   onAddSensor() {
-    this.sensors.push(
+    this.sensorData.push(
       this.fb.group({
         serialNumber: [''],
         calGasName: [''],
@@ -46,6 +48,6 @@ export class PortableInstrumentComponent implements OnInit {
   }
 
   removeSensor(index: number) {
-    this.sensors.removeAt(index);
+    this.sensorData.removeAt(index);
   }
 }

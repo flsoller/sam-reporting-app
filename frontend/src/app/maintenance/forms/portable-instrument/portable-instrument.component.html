@@ -29,8 +29,8 @@
     </button>
   </div>
   <ng-container
-    *ngFor="let sensor of sensors.controls; let i = index"
-    formArrayName="sensors"
+    *ngFor="let sensor of sensorData.controls; let i = index"
+    formArrayName="sensorData"
   >
     <div class="p-4">
       <app-sensor-data

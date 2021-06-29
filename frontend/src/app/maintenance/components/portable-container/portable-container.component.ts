@@ -63,13 +63,11 @@ export class PortableContainerComponent implements OnInit, OnDestroy {
     this.maintenanceApiService
       .getMaintenanceById(this.maintenanceId || '')
       .subscribe((data) => {
-        console.log(data);
-
         for (let instrument of data[0].instruments) {
           this.instruments.push(
             this.fb.group({
               ...instrument,
-              sensors: this.fb.array([]),
+              sensorData: this.fb.array([]),
             })
           );
         }
@@ -82,7 +80,7 @@ export class PortableContainerComponent implements OnInit, OnDestroy {
         instrumentName: [''],
         instrumentSerialNumber: [''],
         testDate: [''],
-        sensors: this.fb.array([]),
+        sensorData: this.fb.array([]),
       })
     );
   }
@@ -93,6 +91,8 @@ export class PortableContainerComponent implements OnInit, OnDestroy {
 
   onSubmitMaintenance() {
     this.maintenanceData.instruments = this.instruments.value;
+    console.log(this.instruments.value);
+
     this.maintenanceApiService
       .addPortableMaintenance(this.maintenanceData)
       .subscribe((res) => {
