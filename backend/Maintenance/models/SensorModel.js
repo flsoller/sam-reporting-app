@@ -24,10 +24,8 @@ const SensorModelSchema = new mongoose.Schema(
       alarmTwo: Number,
       alarmThree: Number,
       alarmFour: Number,
-      additional: {
-        stel: Number,
-        twa: Number,
-      },
+      stel: Number,
+      twa: Number,
     },
   },
   { _id: false }
