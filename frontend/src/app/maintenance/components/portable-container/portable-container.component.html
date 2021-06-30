@@ -16,7 +16,9 @@
     <app-portable-instrument
       [instrumentForm]="instrument"
       [isEdit]="editMode"
-      [preloadedSensorData]="instrument.get('sensorData')?.value"
+      [preloadedData]="
+        editMode ? maintenanceData.instruments[i].sensorData : null
+      "
     ></app-portable-instrument>
     <div class="flex justify-end p-12">
       <button mat-raised-button color="warn" (click)="onRemoveInstrument(i)">
