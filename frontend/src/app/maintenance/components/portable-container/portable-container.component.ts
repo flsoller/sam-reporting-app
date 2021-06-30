@@ -63,6 +63,7 @@ export class PortableContainerComponent implements OnInit, OnDestroy {
     this.maintenanceApiService
       .getMaintenanceById(this.maintenanceId || '')
       .subscribe((data) => {
+        this.maintenanceData = data[0];
         for (let instrument of data[0].instruments) {
           this.instruments.push(
             this.fb.group({

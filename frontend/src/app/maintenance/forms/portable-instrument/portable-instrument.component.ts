@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder } from '@angular/forms';
+import { Sensor } from '../../models/sensor.model';
 
 @Component({
   selector: 'app-portable-instrument',
@@ -8,15 +9,35 @@ import { FormArray, FormBuilder } from '@angular/forms';
 })
 export class PortableInstrumentComponent implements OnInit {
   @Input() instrumentForm: any;
-  @Input() preloadedSensorData: any;
+  @Input() preloadedData: Sensor[] | null = null;
   @Input() isEdit = false;
 
   constructor(private fb: FormBuilder) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.isEdit && this.preloadedData !== null) {
+      this.initForm();
+    }
+  }
 
   get sensorData() {
     return this.instrumentForm.get('sensorData') as FormArray;
+  }
+
+  private initForm() {
+    for (let sensor of this.preloadedData!) {
+      this.sensorData.push(
+        this.fb.group({
+          ...sensor,
+          refGas: this.fb.group({
+            ...sensor.refGas,
+          }),
+          alarmLvls: this.fb.group({
+            ...sensor.alarmLvls,
+          }),
+        })
+      );
+    }
   }
 
   onAddSensor() {
