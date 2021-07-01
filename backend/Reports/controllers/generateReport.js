@@ -10,8 +10,8 @@ export const getPortableReport = asyncHandler(async (req, res, next) => {
   const jobId = req.params.jobId;
 
   const portableMaintenance = await PortableMaintenanceModel.find({
-    jobId: jobId,
+    jobID: jobId,
   });
-
+  console.log(portableMaintenance[0].instruments);
   generateReport(res, portableMaintenance);
 });
