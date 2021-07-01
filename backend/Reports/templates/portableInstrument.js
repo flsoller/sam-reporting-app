@@ -7,8 +7,15 @@ export const generateReport = (res, data) => {
 
   doc.pipe(res);
 
-  createHeader(doc);
-  createFooter(doc);
+  data[0].instruments.forEach((instrument, index) => {
+    createHeader(doc, instrument.instrumentName);
+
+    createFooter(doc);
+
+    if (index !== data[0].instruments.length - 1) {
+      doc.addPage();
+    }
+  });
 
   doc.end();
 };
