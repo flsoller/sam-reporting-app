@@ -35,3 +35,26 @@ export function createFooter(doc, technicianName) {
     .text('Maintenance done by:', 25, 780)
     .text(`${technicianName || 'MSA Technician'}`, 25, 795);
 }
+
+// Informal data block (key / value pair)
+export function createDataBlock(doc, key, value, posX, posY) {
+  const width = 150;
+  const height = 30;
+
+  doc
+    .rect(posX, posY, width, height)
+    .fill('gray')
+    .rect(posX, posY + 30, width, height)
+    .fill('#b5b5b5')
+    .fontSize(14)
+    .fill('black')
+    .font('Helvetica-Bold')
+    .text(key, posX, posY + 10, { width: width, align: 'center' })
+    .font('Helvetica')
+    .text(value, posX, posY + 40, { width: width, align: 'center' });
+}
+
+// Create section header
+export function createSectionHeader(doc, string, posX, posY) {
+  doc.font('Helvetica-Bold').fontSize(18).text(string, posX, posY);
+}
