@@ -36,8 +36,8 @@ export function createFooter(doc, technicianName) {
     .text(`${technicianName || 'MSA Technician'}`, 25, 795);
 }
 
-// Informal data block (key / value pair)
-export function createDataBlock(doc, key, value, posX, posY) {
+// Informal data block (vertical aligned key / value pair)
+export function createVerticalBlock(doc, key, value, posX, posY) {
   const width = 150;
   const height = 30;
 
@@ -54,7 +54,31 @@ export function createDataBlock(doc, key, value, posX, posY) {
     .text(value, posX, posY + 40, { width: width, align: 'center' });
 }
 
+// Informal data block (horizontal aligned key / value pair)
+export function createHorizontalBlock(doc, key, value, posX, posY) {
+  const widthKey = 125;
+  const widthValue = 100;
+  const height = 30;
+
+  doc
+    .rect(posX, posY, widthKey, height)
+    .fill('gray')
+    .rect(posX + 125, posY, widthValue, height)
+    .fill('#b5b5b5')
+    .fontSize(14)
+    .fill('black')
+    .font('Helvetica-Bold')
+    .text(key, posX, posY + 10, { width: widthKey, align: 'center' })
+    .font('Helvetica')
+    .text(value, posX + widthKey, posY + 10, {
+      width: widthValue,
+      align: 'center',
+    });
+}
+
 // Create section header
 export function createSectionHeader(doc, string, posX, posY) {
   doc.font('Helvetica-Bold').fontSize(18).text(string, posX, posY);
 }
+
+// Create sensor data row
