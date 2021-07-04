@@ -3,8 +3,11 @@ import PDFDocument from 'pdfkit';
 import {
   createHeader,
   createFooter,
-  createDataBlock,
+  createVerticalBlock,
+  createHorizontalBlock,
   createSectionHeader,
+  createSubHeading,
+  createSensorDataRow,
 } from './reportBuilder.js';
 
 export const generateReport = (res, data) => {
@@ -21,7 +24,7 @@ export const generateReport = (res, data) => {
     //
     createSectionHeader(doc, 'General Data', 25, 100);
 
-    createDataBlock(
+    createVerticalBlock(
       doc,
       'Serial Number',
       instrument.instrumentSerialNumber,
@@ -29,7 +32,7 @@ export const generateReport = (res, data) => {
       130
     );
 
-    createDataBlock(
+    createVerticalBlock(
       doc,
       'Test Date',
       instrument.testDate.toISOString().split('T')[0],
@@ -40,7 +43,11 @@ export const generateReport = (res, data) => {
     //
     // Sensor data section
     //
-    createSectionHeader(doc, 'Sensor Data', 25, 250);
+    createSectionHeader(doc, 'Sensor Data', 25, 190);
+
+    instrument.sensorData.forEach((sensor, index) => {
+      createSensorDataRow(doc, sensor, index, 25, 220);
+    });
 
     // Page footer
     createFooter(doc);
