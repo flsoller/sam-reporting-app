@@ -53,6 +53,14 @@
               class="text-indigo-600 hover:text-indigo-900"
               >Details</a
             >
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="onGetReport(maintenance.jobID)"
+              class="text-indigo-600 hover:text-indigo-900"
+            >
+              Report
+            </button>
           </td>
         </tr>
         <tr *ngIf="maintenanceData.length === 0">

@@ -6,6 +6,7 @@ import { Customer } from 'src/app/customers/models/customer.model';
 import { SnackBarService } from 'src/app/shared/services/snackbar.service';
 import { MaintenanceApiService } from '../maintenance-api.service';
 import { PortableMaintenance } from '../models/portable-maintenance.model';
+import { ReportApiService } from '../report-api.service';
 
 @Component({
   selector: 'app-maintenance-overview',
@@ -24,7 +25,8 @@ export class MaintenanceOverviewComponent implements OnInit {
     private fb: FormBuilder,
     private customerService: CustomerService,
     private maintenanceApi: MaintenanceApiService,
-    private snackBar: SnackBarService,
+    private reportApi: ReportApiService,
+    private snackBar: SnackBarService
   ) {}
 
   ngOnInit(): void {
@@ -33,13 +35,26 @@ export class MaintenanceOverviewComponent implements OnInit {
 
   setMaintenanceData(event: MatOptionSelectionChange) {
     if (event.source.selected) {
-      this.maintenanceData = []
+      this.maintenanceData = [];
       this.maintenanceApi
         .getMaintenanceByCustomer(event.source.value)
         .subscribe((data) => {
           this.maintenanceData = data;
-          this.snackBar.showSnackBar(`Data loaded for customer: ${data[0].customer}`)
+          this.snackBar.showSnackBar(
+            `Data loaded for customer: ${data[0].customer}`
+          );
         });
     }
+  }
+
+  onGetReport(jobId: string) {
+    this.reportApi.getPortableReport(jobId).subscribe((data: Blob) => {
+      // Generate file
+      const file = new Blob([data], { type: 'application/pdf' });
+
+      // Create URL for pdf report browser tab
+      const fileURL = URL.createObjectURL(file);
+      window.open(fileURL, '_blank', 'noopener');
+    });
   }
 }
