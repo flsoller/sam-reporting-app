@@ -55,3 +55,23 @@ export const getCustomerById = asyncHandler(async (req, res, next) => {
     throw new Error('Customer not found');
   }
 });
+
+// @desc    Update customer
+// @route   PUT /api/v1/customers
+// @access  Private
+export const updateCustomer = asyncHandler(async (req, res, next) => {
+  const customer = await Customer.findById(req.customer._id);
+
+  if (customer) {
+    customer = req.customer || customer;
+
+    const updatedCustomer = await customer.save();
+
+    res.status(200).json({
+      message: `${updatedCustomer.customerName} was updated.`,
+    });
+  } else {
+    res.status(404);
+    throw new Error('Customer not found');
+  }
+});
