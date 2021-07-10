@@ -74,7 +74,7 @@
           [disabled]="submitDisabled"
           class="w-full"
         >
-          Add Customer
+          {{ isEdit ? "Update Customer" : "Add Customer" }}
         </button>
         <button
           *ngIf="isEdit"
