@@ -43,6 +43,10 @@ export class CustomerDetailsComponent implements OnInit {
       this.customerId = param.get('id');
       this.isEdit = param.get('edit') === 'edit' ? true : false;
     });
+
+    if (this.isEdit) {
+      this.initForm();
+    }
   }
 
   onSubmit() {
@@ -53,5 +57,11 @@ export class CustomerDetailsComponent implements OnInit {
         this.customerApi.getCustomers();
       });
     }
+  }
+
+  private initForm() {
+    this.customerApi.getCustomerById(this.customerId || '').subscribe((res) => {
+      this.customerForm.patchValue(res);
+    });
   }
 }
