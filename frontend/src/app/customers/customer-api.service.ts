@@ -38,6 +38,18 @@ export class CustomerApiService {
       .pipe(catchError(this.handleError.bind(this)));
   }
 
+  updateCustomer(data: Customer) {
+    return this.http
+      .put<NewCustomerResponse>(this.baseURL, data)
+      .pipe(catchError(this.handleError.bind(this)));
+  }
+
+  getCustomerById(id: string) {
+    return this.http
+      .get<Customer>(`${this.baseURL}/${id}`)
+      .pipe(catchError(this.handleError.bind(this)));
+  }
+
   //
   // ERROR HANDLING
   //
