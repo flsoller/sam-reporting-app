@@ -57,13 +57,18 @@ export const getCustomerById = asyncHandler(async (req, res, next) => {
 });
 
 // @desc    Update customer
-// @route   PUT /api/v1/customers
+// @route   PUT /api/v1/customers/:id
 // @access  Private
 export const updateCustomer = asyncHandler(async (req, res, next) => {
-  const customer = await Customer.findById(req.customer._id);
+  const { customerName, customerAddress, customerId, customerRef } = req.body;
+
+  const customer = await Customer.findById(req.params.id);
 
   if (customer) {
-    customer = req.customer || customer;
+    customer.customerName = customerName;
+    customer.customerAddress = customerAddress;
+    customer.customerId = customerId;
+    customer.customerRef = customerRef;
 
     const updatedCustomer = await customer.save();
 
