@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { SnackBarService } from 'src/app/shared/services/snackbar.service';
 import { CustomerApiService } from '../customer-api.service';
@@ -35,7 +35,8 @@ export class CustomerDetailsComponent implements OnInit {
     private fb: FormBuilder,
     private customerApi: CustomerApiService,
     private snackBarService: SnackBarService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -56,6 +57,16 @@ export class CustomerDetailsComponent implements OnInit {
         this.customerForm.reset();
         this.customerApi.getCustomers();
       });
+    }
+
+    if (this.isEdit) {
+      this.customerApi
+        .updateCustomer(this.customerForm.value, this.customerId || '')
+        .subscribe((res) => {
+          this.snackBarService.showSnackBar(res.message);
+          this.customerApi.getCustomers();
+          this.router.navigate(['../../'], { relativeTo: this.route });
+        });
     }
   }
 

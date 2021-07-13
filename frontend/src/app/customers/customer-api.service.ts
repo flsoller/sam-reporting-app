@@ -38,9 +38,9 @@ export class CustomerApiService {
       .pipe(catchError(this.handleError.bind(this)));
   }
 
-  updateCustomer(data: Customer) {
+  updateCustomer(data: Customer, id: string) {
     return this.http
-      .put<NewCustomerResponse>(this.baseURL, data)
+      .put<NewCustomerResponse>(`${this.baseURL}/${id}`, data)
       .pipe(catchError(this.handleError.bind(this)));
   }
 
