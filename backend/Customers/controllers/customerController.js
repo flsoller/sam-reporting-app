@@ -80,3 +80,21 @@ export const updateCustomer = asyncHandler(async (req, res, next) => {
     throw new Error('Customer not found');
   }
 });
+
+// @desc    Delete customer
+// @route   DELETE /api/v1/customers/:id
+// @access  Private
+export const deleteCustomer = asyncHandler(async (req, res, next) => {
+  const customer = await Customer.findById(req.params.id);
+
+  if (customer) {
+    await customer.remove();
+
+    res.status(200).json({
+      message: `${customer.customerName} was deleted.`,
+    });
+  } else {
+    res.status(404);
+    throw new Error('Customer not found');
+  }
+});
