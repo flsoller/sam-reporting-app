@@ -10,7 +10,7 @@ import { CustomerService } from './customer.service';
 // Models
 import { Customer } from './models/customer.model';
 
-export interface NewCustomerResponse {
+export interface CustomerApiResponse {
   message: string;
 }
 
@@ -34,19 +34,25 @@ export class CustomerApiService {
 
   newCustomer(data: Customer) {
     return this.http
-      .post<NewCustomerResponse>(this.baseURL, data)
+      .post<CustomerApiResponse>(this.baseURL, data)
       .pipe(catchError(this.handleError.bind(this)));
   }
 
   updateCustomer(data: Customer, id: string) {
     return this.http
-      .put<NewCustomerResponse>(`${this.baseURL}/${id}`, data)
+      .put<CustomerApiResponse>(`${this.baseURL}/${id}`, data)
       .pipe(catchError(this.handleError.bind(this)));
   }
 
   getCustomerById(id: string) {
     return this.http
       .get<Customer>(`${this.baseURL}/${id}`)
+      .pipe(catchError(this.handleError.bind(this)));
+  }
+
+  deleteCustomer(id: string) {
+    return this.http
+      .delete<CustomerApiResponse>(`${this.baseURL}/${id}`)
       .pipe(catchError(this.handleError.bind(this)));
   }
 
