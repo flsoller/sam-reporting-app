@@ -70,6 +70,18 @@ export class CustomerDetailsComponent implements OnInit {
     }
   }
 
+  onDelete() {
+    if (this.isEdit) {
+      this.customerApi
+        .deleteCustomer(this.customerId || '')
+        .subscribe((res) => {
+          this.snackBarService.showSnackBar(res.message);
+          this.customerApi.getCustomers();
+          this.router.navigate(['../../'], { relativeTo: this.route });
+        });
+    }
+  }
+
   private initForm() {
     this.customerApi.getCustomerById(this.customerId || '').subscribe((res) => {
       this.customerForm.patchValue(res);
