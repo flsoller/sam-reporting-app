@@ -24,6 +24,11 @@ const routes: Routes = [
         (module) => module.MaintenanceModule
       ),
   },
+  {
+    path: 'auth',
+    loadChildren: () =>
+      import('./auth/auth.module').then((module) => module.AuthModule),
+  },
 ];
 
 @NgModule({
