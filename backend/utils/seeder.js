@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import dotenv from 'dotenv';
-import User from './Auth/models/userModel.js';
-import connectDatabase from './config/database.js';
+import User from '../Auth/models/userModel.js';
+import connectDatabase from '../config/database.js';
 
 dotenv.config();
 
