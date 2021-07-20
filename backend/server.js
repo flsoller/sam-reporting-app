@@ -8,6 +8,7 @@ import connectDatabase from './config/database.js';
 import maintenanceData from './Maintenance/routes/maintenanceData.js';
 import generateReport from './Reports/routes/generateReport.js';
 import customerRoutes from './Customers/routes/customerRoutes.js';
+import userRoutes from './Auth/routes/userRoutes.js';
 
 // File imports
 import { errorHandler } from './middleware/errorMiddleware.js';
@@ -28,6 +29,7 @@ app.use(express.json());
 app.use('/api/v1/maintenance-data', maintenanceData);
 app.use('/api/v1/reports', generateReport);
 app.use('/api/v1/customers', customerRoutes);
+app.use('/api/v1/users', userRoutes);
 
 // Path config
 const __dirname = path.resolve();
