@@ -4,14 +4,7 @@ import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { SnackBarService } from '../shared/services/snackbar.service';
-
-interface UserResponse {
-  _id: string;
-  name: string;
-  email: string;
-  isAdmin: boolean;
-  token: string;
-}
+import { User } from './user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +16,7 @@ export class AuthService {
 
   userLogin(email: string, password: string) {
     return this.http
-      .post<UserResponse>(`${this.baseUrl}/login`, { email, password })
+      .post<User>(`${this.baseUrl}/login`, { email, password })
       .pipe(catchError(this.handleError.bind(this)));
   }
 
