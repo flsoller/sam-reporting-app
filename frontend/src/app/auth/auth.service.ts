@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { LocalStorageService } from '../shared/services/localStorage.service';
 
 import { SnackBarService } from '../shared/services/snackbar.service';
 import { User } from './user.model';
@@ -12,12 +13,20 @@ import { User } from './user.model';
 export class AuthService {
   private baseUrl = '/api/v1/users';
 
-  constructor(private http: HttpClient, private snackBar: SnackBarService) {}
+  constructor(
+    private http: HttpClient,
+    private snackBar: SnackBarService,
+    private storageService: LocalStorageService
+  ) {}
 
   userLogin(email: string, password: string) {
-    return this.http
+    this.http
       .post<User>(`${this.baseUrl}/login`, { email, password })
-      .pipe(catchError(this.handleError.bind(this)));
+      .pipe(catchError(this.handleError.bind(this)))
+      .subscribe((user) => {
+        this.storageService.setUserData(user);
+        this.snackBar.showSnackBar(`Hi ${user.name}. Have fun today.`);
+      });
   }
 
   //

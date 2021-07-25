@@ -30,10 +30,8 @@ export class LoginComponent implements OnInit {
     }
 
     if (this.loginForm.valid) {
-      this.authService.userLogin(email, password).subscribe((res) => {
-        this.snackBar.showSnackBar(`Hi ${res.name}. Have fun today.`);
-        console.log(res);
-      });
+      this.authService.userLogin(email, password);
+      this.loginForm.reset();
     }
   }
 }
