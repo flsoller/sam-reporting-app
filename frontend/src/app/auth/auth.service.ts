@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { throwError } from 'rxjs';
+import { BehaviorSubject, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { LocalStorageService } from '../shared/services/localStorage.service';
 
@@ -12,6 +12,8 @@ import { User } from './user.model';
 })
 export class AuthService {
   private baseUrl = '/api/v1/users';
+
+  user = new BehaviorSubject<User | null>(null);
 
   constructor(
     private http: HttpClient,
@@ -26,7 +28,14 @@ export class AuthService {
       .subscribe((user) => {
         this.storageService.setUserData(user);
         this.snackBar.showSnackBar(`Hi ${user.name}. Have fun today.`);
+        this.user.next(user);
       });
+  }
+
+  isAuthenticated(): boolean {
+    return this.user.value?.expiration || 0 - new Date().getTime() / 1000 > 0
+      ? true
+      : false;
   }
 
   //
