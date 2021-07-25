@@ -1,4 +1,5 @@
 import asyncHandler from '../../middleware/asyncHandler.js';
+import jwt from 'jsonwebtoken';
 
 import { createToken } from '../../utils/jwtHelper.js';
 import User from '../models/userModel.js';
@@ -12,12 +13,16 @@ export const authUser = asyncHandler(async (req, res, next) => {
   const user = await User.findOne({ email });
 
   if (user && (await user.checkPassword(password))) {
+    const token = createToken(user._id);
+    const { exp } = jwt.verify(token, process.env.JWT_KEY);
+
     res.json({
       _id: user._id,
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
-      token: createToken(user._id),
+      token,
+      expiration: exp,
     });
   } else {
     res.status(401);
