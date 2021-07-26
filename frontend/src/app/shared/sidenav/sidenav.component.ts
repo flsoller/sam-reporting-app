@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { SidenavService } from '../services/sidenav.service';
 
 @Component({
@@ -10,7 +11,7 @@ export class SidenavComponent implements OnInit {
   menuWidth: string[] = [];
   open = true;
 
-  constructor(private sidenavService: SidenavService) {}
+  constructor(private sidenavService: SidenavService, public router: Router) {}
 
   ngOnInit(): void {
     this.menuWidth = this.sidenavService.initialSidenav();

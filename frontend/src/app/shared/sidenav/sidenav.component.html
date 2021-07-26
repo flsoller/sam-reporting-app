@@ -9,6 +9,7 @@
     transform
   "
   [class]="menuWidth"
+  *ngIf="router.url != '/auth'"
 >
   <div class="mt-2 flex flex-col items-start space-y-2">
     <a routerLink="/" mat-button color="primary">
