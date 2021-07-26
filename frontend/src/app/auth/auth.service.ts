@@ -1,5 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { LocalStorageService } from '../shared/services/localStorage.service';
@@ -18,7 +19,8 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private snackBar: SnackBarService,
-    private storageService: LocalStorageService
+    private storageService: LocalStorageService,
+    private router: Router
   ) {}
 
   userLogin(email: string, password: string) {
@@ -29,7 +31,12 @@ export class AuthService {
         this.storageService.setUserData(user);
         this.snackBar.showSnackBar(`Hi ${user.name}. Have fun today.`);
         this.user.next(user);
+        this.router.navigate(['']);
       });
+  }
+
+  appStartAuthHandler() {
+    this.user.next(this.storageService.getUserData());
   }
 
   isAuthenticated(): boolean {
