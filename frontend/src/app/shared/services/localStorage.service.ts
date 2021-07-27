@@ -37,6 +37,10 @@ export class LocalStorageService {
     }
   }
 
+  deleteUserData() {
+    localStorage.removeItem(this.USER_IDENTIFIER);
+  }
+
   //
   // Local storage interaction for portable maintenance data.
   // Used to save unfinished maintenance data or load when connection was lost
