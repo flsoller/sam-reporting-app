@@ -23,6 +23,7 @@ export class AuthService {
     private router: Router
   ) {}
 
+  // Handle login flow
   userLogin(email: string, password: string) {
     this.http
       .post<User>(`${this.baseUrl}/login`, { email, password })
@@ -35,12 +36,31 @@ export class AuthService {
       });
   }
 
+  // Gets user from localStorage and sets it in service
   appStartAuthHandler() {
     this.user.next(this.storageService.getUserData());
+
+    if (!this.istokenTimeValid()) {
+      this.storageService.deleteUserData();
+      this.user.next(null);
+    }
   }
 
+  // Checks if token is not expired.
   isAuthenticated(): boolean {
-    return this.user.value?.expiration || 0 - new Date().getTime() / 1000 > 0
+    return (this.user.value?.expiration || 0) - new Date().getTime() / 1000 > 0
+      ? true
+      : false;
+  }
+
+  // Checks if token is valid long enough to prevent token expiry during user workflow
+  // TODO: Research refresh tokens
+  private istokenTimeValid(): boolean {
+    const secondsPerHour = 3600;
+    const minValidityTime = secondsPerHour * 8;
+
+    return (this.user.value?.expiration || 0) - new Date().getTime() / 1000 >
+      minValidityTime
       ? true
       : false;
   }
