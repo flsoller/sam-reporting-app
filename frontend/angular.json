@@ -60,7 +60,14 @@
               ],
               "outputHashing": "all"
             },
-            "development": {}
+            "development": {
+              "optimization": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "extractLicenses": true,
+              "vendorChunk": true,
+              "buildOptimizer": false
+            }
           },
           "defaultConfiguration": "production"
         },
