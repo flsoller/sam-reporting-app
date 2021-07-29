@@ -12,6 +12,9 @@ import { SharedModule } from './shared/shared.module';
 // Mat imports
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
+// Interceptor imports
+import { httpInterceptorProviders } from './interceptors';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -22,7 +25,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     SharedModule,
     MatSnackBarModule,
   ],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
