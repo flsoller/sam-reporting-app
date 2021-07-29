@@ -26,7 +26,10 @@ export class AuthService {
   // Handle login flow
   userLogin(email: string, password: string) {
     this.http
-      .post<User>(`${this.baseUrl}/login`, { email, password })
+      .post<User>(`${this.baseUrl}/login`, {
+        email: email.toLowerCase(),
+        password,
+      })
       .pipe(catchError(this.handleError.bind(this)))
       .subscribe((user) => {
         this.storageService.setUserData(user);
