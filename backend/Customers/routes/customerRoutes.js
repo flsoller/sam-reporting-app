@@ -1,6 +1,9 @@
 // Package imports
 import express from 'express';
 
+// Middleware
+import { protectedRoute } from '../../middleware/authMiddleware.js';
+
 // Controller imports
 import {
   createCustomer,
@@ -14,11 +17,14 @@ import {
 const router = express.Router();
 
 // Route definitions
-router.route('/').post(createCustomer).get(getAllCustomers);
+router
+  .route('/')
+  .post(protectedRoute, createCustomer)
+  .get(protectedRoute, getAllCustomers);
 router
   .route('/:id')
-  .get(getCustomerById)
-  .put(updateCustomer)
-  .delete(deleteCustomer);
+  .get(protectedRoute, getCustomerById)
+  .put(protectedRoute, updateCustomer)
+  .delete(protectedRoute, deleteCustomer);
 
 export default router;
