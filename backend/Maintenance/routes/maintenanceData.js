@@ -1,6 +1,9 @@
 // Package imports
 import express from 'express';
 
+// Middleware
+import { protectedRoute } from '../../middleware/authMiddleware.js';
+
 // Controller imports
 import {
   addPortableMaintenanceData,
@@ -12,8 +15,12 @@ import {
 const router = express.Router();
 
 // Route definitions
-router.route('/portable').post(addPortableMaintenanceData);
-router.route('/portable/:customer').get(getPortableMaintDataByCustomer);
-router.route('/portable/id/:jobId').get(getPortableMaintDataByJobId);
+router.route('/portable').post(protectedRoute, addPortableMaintenanceData);
+router
+  .route('/portable/:customer')
+  .get(protectedRoute, getPortableMaintDataByCustomer);
+router
+  .route('/portable/id/:jobId')
+  .get(protectedRoute, getPortableMaintDataByJobId);
 
 export default router;
