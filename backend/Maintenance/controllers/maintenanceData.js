@@ -7,7 +7,11 @@ import PortableMaintenanceModel from '../models/PortableMaintenanceModel.js';
 // @access  Private
 export const addPortableMaintenanceData = asyncHandler(
   async (req, res, next) => {
-    const portableData = await PortableMaintenanceModel.create(req.body);
+    const portableData = await PortableMaintenanceModel.create({
+      ...req.body,
+      // user object becomes available on req object through auth middleware for protected routes
+      technician: req.user._id,
+    });
 
     if (portableData) {
       res.status(201).json({
