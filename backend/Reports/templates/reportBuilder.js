@@ -24,7 +24,7 @@ export function createHeader(doc, instrumentName) {
 }
 
 // Universal page footer
-export function createFooter(doc, technicianName) {
+export function createFooter(doc, technicianName, technicianEmail) {
   doc
     .rect(0, 761.89, 595.28, 80)
     .fill('#b5b5b5')
@@ -37,7 +37,11 @@ export function createFooter(doc, technicianName) {
     .text('MSAsafety.com', 430, 797)
     .fontSize(10)
     .text('Maintenance done by:', 25, 780)
-    .text(`${technicianName || 'MSA Technician'}`, 25, 795);
+    .text(
+      `${technicianName || 'MSA Technician'} | ${technicianEmail || ''}`,
+      25,
+      795
+    );
 }
 
 // Informal data block (vertical aligned key / value pair)
