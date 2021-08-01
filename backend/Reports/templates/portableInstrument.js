@@ -10,12 +10,12 @@ import {
   createSensorDataRow,
 } from './reportBuilder.js';
 
-export const generateReport = (res, data) => {
+export const generateReport = (res, data, technician) => {
   const doc = new PDFDocument({ size: 'A4', margin: 25 });
 
   doc.pipe(res);
 
-  data[0].instruments.forEach((instrument, index) => {
+  data.instruments.forEach((instrument, index) => {
     // Page header
     createHeader(doc, instrument.instrumentName);
 
@@ -50,10 +50,10 @@ export const generateReport = (res, data) => {
     });
 
     // Page footer
-    createFooter(doc);
+    createFooter(doc, technician.name, technician.email);
 
     // Create new page for next instrument in array
-    if (index !== data[0].instruments.length - 1) {
+    if (index !== data.instruments.length - 1) {
       doc.addPage();
     }
   });
