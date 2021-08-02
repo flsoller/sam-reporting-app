@@ -16,6 +16,7 @@ import { ReportApiService } from '../report-api.service';
 export class MaintenanceOverviewComponent implements OnInit {
   searchForm = this.fb.group({
     customer: ['', [Validators.required]],
+    showSelf: [true, [Validators.required]],
   });
 
   customers: Customer[] = [];
@@ -37,7 +38,10 @@ export class MaintenanceOverviewComponent implements OnInit {
     if (event.source.selected) {
       this.maintenanceData = [];
       this.maintenanceApi
-        .getMaintenanceByCustomer(event.source.value)
+        .getMaintenanceByCustomer(
+          event.source.value,
+          this.searchForm.value.showSelf
+        )
         .subscribe((data) => {
           this.maintenanceData = data;
           this.snackBar.showSnackBar(
