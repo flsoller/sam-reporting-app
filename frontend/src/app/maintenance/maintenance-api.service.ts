@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { AuthService } from '../auth/auth.service';
 import { SnackBarService } from '../shared/services/snackbar.service';
 import { PortableMaintenance } from './models/portable-maintenance.model';
 
@@ -15,15 +16,26 @@ export interface NewMaintenanceRes {
 export class MaintenanceApiService {
   baseUrl = '/api/v1/maintenance-data';
 
-  constructor(private http: HttpClient, private snackBar: SnackBarService) {}
+  constructor(
+    private http: HttpClient,
+    private snackBar: SnackBarService,
+    private auth: AuthService
+  ) {}
 
   addPortableMaintenance(data: PortableMaintenance) {
     return this.http.post<NewMaintenanceRes>(`${this.baseUrl}/portable`, data);
   }
 
-  getMaintenanceByCustomer(customer: string) {
+  getMaintenanceByCustomer(customer: string, filterTechnician: boolean) {
+    let queryString = '';
+    if (filterTechnician && this.auth.user.value?._id) {
+      queryString = `?technician=${this.auth.user.value?._id}`;
+    }
+
     return this.http
-      .get<PortableMaintenance[]>(`${this.baseUrl}/portable/${customer}`)
+      .get<PortableMaintenance[]>(
+        `${this.baseUrl}/portable/${customer}${queryString}`
+      )
       .pipe(catchError(this.handleError.bind(this)));
   }
 
