@@ -1,3 +1,5 @@
+import * as path from 'path';
+
 //
 // This file contains building blocks for reusable sections to be used
 // in a report template.
@@ -8,7 +10,7 @@ const font = 'Helvetica';
 const boldFont = 'Helvetica-Bold';
 
 // Universal page header
-export function createHeader(doc, instrumentName) {
+export function createHeader(doc, instrumentName, imgPath) {
   doc
     .rect(0, 0, 595.28, 80)
     .fill('#b5b5b5')
@@ -20,7 +22,8 @@ export function createHeader(doc, instrumentName) {
     .stroke()
     .fontSize(18)
     .font(boldFont)
-    .text(`${instrumentName || 'Not Provided'}`, 25, 50);
+    .text(`${instrumentName || 'Not Provided'}`, 25, 50)
+    .image(imgPath, 400, 15, { height: 50 });
 }
 
 // Universal page footer

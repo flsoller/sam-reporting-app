@@ -1,4 +1,5 @@
 import PDFDocument from 'pdfkit';
+import * as path from 'path';
 
 import {
   createHeader,
@@ -13,11 +14,22 @@ import {
 export const generateReport = (res, data, technician) => {
   const doc = new PDFDocument({ size: 'A4', margin: 25 });
 
+  // Path config
+  const __dirname = path.resolve();
+
+  const img = path.resolve(
+    __dirname,
+    'backend',
+    'Reports',
+    'assets',
+    'logo.png'
+  );
+
   doc.pipe(res);
 
   data.instruments.forEach((instrument, index) => {
     // Page header
-    createHeader(doc, instrument.instrumentName);
+    createHeader(doc, instrument.instrumentName, img);
 
     //
     // General data section
