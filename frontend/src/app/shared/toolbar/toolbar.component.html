@@ -6,7 +6,6 @@
     flex
     fixed
     items-center
-    space-x-4
     shadow-lg
     overflow-scroll
     z-50
@@ -23,7 +22,18 @@
     </button>
   </div>
 
-  <span class="text-2xl tracking-wider font-bold text-white"
+  <span class="text-xl sm:text-2xl tracking-wider font-bold text-white ml-4"
     >SAM Application</span
   >
+  <div class="text-lg ml-auto mr-4">
+    <a
+      routerLink="/profile"
+      mat-mini-fab
+      color="accent"
+      aria-label="Profile"
+      class="focus:outline-none"
+    >
+      {{ nameInitial }}
+    </a>
+  </div>
 </div>
