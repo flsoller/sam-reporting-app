@@ -1,8 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { AuthGuard } from './auth/auth.guard';
+
+// Components
+import { ProfileComponent } from './auth/profile/profile.component';
+
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: 'profile', canActivate: [AuthGuard], component: ProfileComponent },
   {
     path: 'dashboard',
     loadChildren: () =>
