@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth.service';
 
 import { CustomerService } from 'src/app/customers/customer.service';
 import { Customer } from 'src/app/customers/models/customer.model';
@@ -19,6 +20,7 @@ export class MaintenanceStartComponent implements OnInit {
   });
 
   customers: Customer[] = [];
+  technicianId = '';
 
   instrumentDefinition = {
     portable: 'Portable Instrument',
@@ -34,12 +36,14 @@ export class MaintenanceStartComponent implements OnInit {
     private fb: FormBuilder,
     private customerService: CustomerService,
     private portMaintService: PortableMaintenanceService,
+    private auth: AuthService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.customers = this.customerService.getCustomers();
+    this.technicianId = this.auth.user.value?._id || '';
   }
 
   onSubmit() {
@@ -47,7 +51,8 @@ export class MaintenanceStartComponent implements OnInit {
       switch (this.startForm.value.product) {
         case this.instrumentDefinition.portable:
           let id = this.portMaintService.createNew(
-            this.startForm.value.customer
+            this.startForm.value.customer,
+            this.technicianId
           );
           this.router.navigate(['portable', id], { relativeTo: this.route });
       }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { v4 as uuidv4 } from 'uuid';
+import { AuthService } from '../auth/auth.service';
 
 import { PortableMaintenance } from './models/portable-maintenance.model';
 import { PortableUnit } from './models/portable.model';
@@ -10,6 +11,8 @@ import { PortableUnit } from './models/portable.model';
 export class PortableMaintenanceService {
   maintenanceData: PortableMaintenance[] = [];
 
+  constructor() {}
+
   getDataById(jobId: string): PortableMaintenance {
     let data = this.maintenanceData.filter(
       (maintenance) => maintenance.jobID === jobId
@@ -17,11 +20,12 @@ export class PortableMaintenanceService {
     return data;
   }
 
-  createNew(customer: string): string {
+  createNew(customer: string, technicianId: string): string {
     this.maintenanceData.push({
       jobID: uuidv4(),
       customer: customer,
       instruments: [],
+      technician: technicianId,
     });
 
     // Logging
