@@ -8,7 +8,7 @@
         [hasBtnCol]="true"
       ></thead>
       <tbody class="bg-white divide-y divide-gray-200">
-        <tr *ngFor="let customer of customers">
+        <tr *ngFor="let customer of customers | async">
           <!-- name cell -->
           <td
             app-table-cell

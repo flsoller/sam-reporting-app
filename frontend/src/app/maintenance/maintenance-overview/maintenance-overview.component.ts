@@ -1,12 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+
+// Mat imports
 import { MatOptionSelectionChange } from '@angular/material/core';
-import { CustomerService } from 'src/app/customers/customer.service';
-import { Customer } from 'src/app/customers/models/customer.model';
+
+// Services
 import { SnackBarService } from 'src/app/shared/services/snackbar.service';
-import { MaintenanceApiService } from '../maintenance-api.service';
-import { PortableMaintenance } from '../models/portable-maintenance.model';
 import { ReportApiService } from '../report-api.service';
+import { MaintenanceApiService } from '../maintenance-api.service';
+
+// Models
+import { Customer } from 'src/app/customers/models/customer.model';
+import { PortableMaintenance } from '../models/portable-maintenance.model';
+import { CustomerApiService } from 'src/app/customers/customer-api.service';
 
 @Component({
   selector: 'app-maintenance-overview',
@@ -19,19 +26,19 @@ export class MaintenanceOverviewComponent implements OnInit {
     showSelf: [true, [Validators.required]],
   });
 
-  customers: Customer[] = [];
+  customers: Observable<Customer[]> | null = null;
   maintenanceData: PortableMaintenance[] = [];
 
   constructor(
     private fb: FormBuilder,
-    private customerService: CustomerService,
+    private customerApi: CustomerApiService,
     private maintenanceApi: MaintenanceApiService,
     private reportApi: ReportApiService,
     private snackBar: SnackBarService
   ) {}
 
   ngOnInit(): void {
-    this.customers = this.customerService.getCustomers();
+    this.customers = this.customerApi.getCustomers();
   }
 
   setMaintenanceData(event: MatOptionSelectionChange) {

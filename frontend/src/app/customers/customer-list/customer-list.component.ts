@@ -1,8 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+
+// Services
 import { CustomerApiService } from '../customer-api.service';
 
-import { CustomerService } from '../customer.service';
+// Models
 import { Customer } from '../models/customer.model';
 
 @Component({
@@ -10,28 +12,12 @@ import { Customer } from '../models/customer.model';
   templateUrl: './customer-list.component.html',
   styleUrls: ['./customer-list.component.scss'],
 })
-export class CustomerListComponent implements OnInit, OnDestroy {
-  customers: Customer[] = [];
-  subscription: Subscription = new Subscription();
+export class CustomerListComponent implements OnInit {
+  customers: Observable<Customer[]> | null = null;
 
-  constructor(
-    private customerService: CustomerService,
-    private customerApi: CustomerApiService
-  ) {}
+  constructor(private customerApi: CustomerApiService) {}
 
   ngOnInit(): void {
-    this.customerApi.getCustomers();
-
-    this.subscription = this.customerService.customersChanged.subscribe(
-      (customers: Customer[]) => {
-        this.customers = customers;
-      }
-    );
-
-    this.customers = this.customerService.getCustomers();
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.customers = this.customerApi.getCustomers();
   }
 }

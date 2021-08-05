@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+
+// Services
+import { PortableMaintenanceService } from '../portable-maintenance.service';
+import { CustomerApiService } from 'src/app/customers/customer-api.service';
 import { AuthService } from 'src/app/auth/auth.service';
 
-import { CustomerService } from 'src/app/customers/customer.service';
+// Models
 import { Customer } from 'src/app/customers/models/customer.model';
-import { PortableMaintenanceService } from '../portable-maintenance.service';
 
 @Component({
   selector: 'app-maintenance-start',
@@ -19,7 +23,7 @@ export class MaintenanceStartComponent implements OnInit {
     amount: [1, Validators.min(1)],
   });
 
-  customers: Customer[] = [];
+  customers: Observable<Customer[]> | null = null;
   technicianId = '';
 
   instrumentDefinition = {
@@ -34,7 +38,7 @@ export class MaintenanceStartComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private customerService: CustomerService,
+    private customerApi: CustomerApiService,
     private portMaintService: PortableMaintenanceService,
     private auth: AuthService,
     private router: Router,
@@ -42,7 +46,7 @@ export class MaintenanceStartComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.customers = this.customerService.getCustomers();
+    this.customers = this.customerApi.getCustomers();
     this.technicianId = this.auth.user.value?._id || '';
   }
 

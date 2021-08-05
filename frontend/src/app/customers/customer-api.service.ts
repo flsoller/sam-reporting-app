@@ -5,7 +5,6 @@ import { throwError } from 'rxjs';
 
 // Service imports
 import { SnackBarService } from '../shared/services/snackbar.service';
-import { CustomerService } from './customer.service';
 
 // Models
 import { Customer } from './models/customer.model';
@@ -20,16 +19,12 @@ export interface CustomerApiResponse {
 export class CustomerApiService {
   baseURL = '/api/v1/customers';
 
-  constructor(
-    private http: HttpClient,
-    private customerService: CustomerService,
-    private snackBar: SnackBarService
-  ) {}
+  constructor(private http: HttpClient, private snackBar: SnackBarService) {}
 
   getCustomers() {
-    this.http.get<Customer[]>(this.baseURL).subscribe((res) => {
-      this.customerService.setCustomers(res);
-    });
+    return this.http
+      .get<Customer[]>(this.baseURL)
+      .pipe(catchError(this.handleError.bind(this)));
   }
 
   newCustomer(data: Customer) {

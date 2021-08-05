@@ -5,7 +5,7 @@
         <mat-label>Select Customer</mat-label>
         <mat-select formControlName="customer">
           <mat-option
-            *ngFor="let customer of customers"
+            *ngFor="let customer of customers | async"
             [value]="customer.customerName"
             >{{ customer.customerName }}</mat-option
           >
