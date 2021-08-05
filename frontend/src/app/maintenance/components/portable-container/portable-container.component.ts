@@ -22,6 +22,7 @@ export class PortableContainerComponent implements OnInit, OnDestroy {
     jobID: '',
     customer: '',
     instruments: [],
+    technician: '',
   };
 
   instrumentForm = this.fb.group({
