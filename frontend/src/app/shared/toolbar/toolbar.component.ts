@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { SidenavService } from '../services/sidenav.service';
 
@@ -7,8 +8,9 @@ import { SidenavService } from '../services/sidenav.service';
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.scss'],
 })
-export class ToolbarComponent implements OnInit {
-  nameInitial = '';
+export class ToolbarComponent implements OnInit, OnDestroy {
+  sub: Subscription = new Subscription();
+  nameInitial: string | null = null;
 
   constructor(
     private sidenavService: SidenavService,
@@ -16,11 +18,16 @@ export class ToolbarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.nameInitial =
-      this.auth.user.value?.name.split('')[0].toLocaleUpperCase() || '';
+    this.sub = this.auth.user.subscribe((user) => {
+      this.nameInitial = user?.name.split('')[0].toLocaleUpperCase() || null;
+    });
   }
 
   onToggleRequest() {
     this.sidenavService.toggleMenu();
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }
