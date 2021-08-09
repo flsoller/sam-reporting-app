@@ -6,7 +6,7 @@ import { catchError } from 'rxjs/operators';
 import { LocalStorageService } from '../shared/services/localStorage.service';
 
 import { SnackBarService } from '../shared/services/snackbar.service';
-import { User } from './user.model';
+import { User, UserProfile } from './user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -54,6 +54,11 @@ export class AuthService {
     return (this.user.value?.expiration || 0) - new Date().getTime() / 1000 > 0
       ? true
       : false;
+  }
+
+  // Gets user profile from server
+  getProfile() {
+    return this.http.get<UserProfile>(`${this.baseUrl}/profile`);
   }
 
   // Checks if token is valid long enough to prevent token expiry during user workflow
