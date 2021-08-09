@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { AuthService } from '../auth.service';
+import { UserProfile } from '../user.model';
 
 @Component({
   selector: 'app-profile',
@@ -18,9 +21,24 @@ export class ProfileComponent implements OnInit {
     }),
   });
 
-  constructor(private fb: FormBuilder) {}
+  userProfile: Observable<UserProfile> | null = null;
 
-  ngOnInit(): void {}
+  constructor(private fb: FormBuilder, private auth: AuthService) {}
+
+  ngOnInit(): void {
+    this.userProfile = this.auth.getProfile();
+
+    this.initForm();
+  }
+
+  private initForm() {
+    this.userProfile?.subscribe((profile) => {
+      this.userForm.patchValue({
+        userName: profile.name,
+        userEmail: profile.email,
+      });
+    });
+  }
 
   onSubmit() {}
 }
