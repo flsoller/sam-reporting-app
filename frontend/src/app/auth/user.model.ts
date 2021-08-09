@@ -6,3 +6,10 @@ export interface User {
   token: string;
   expiration: number;
 }
+
+export interface UserProfile {
+  _id: string;
+  name: string;
+  email: string;
+  isAdmin: boolean;
+}
