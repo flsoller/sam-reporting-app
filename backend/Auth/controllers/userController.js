@@ -62,11 +62,13 @@ export const updateUser = asyncHandler(async (req, res, next) => {
     user.name = name || user.name;
     user.email = email || user.email;
 
-    if (newPassword && (await user.checkPassword(password))) {
-      user.password = newPassword;
-    } else if (!(await user.checkPassword(password))) {
-      res.status(404);
-      throw new Error('User not updated');
+    if (password) {
+      if (newPassword && (await user.checkPassword(password))) {
+        user.password = newPassword;
+      } else if (!(await user.checkPassword(password))) {
+        res.status(404);
+        throw new Error('User not updated');
+      }
     }
 
     const updatedUser = await user.save();
