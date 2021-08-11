@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { AuthService } from '../auth.service';
 import { UserProfile } from '../user.model';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-profile',
@@ -23,10 +24,10 @@ export class ProfileComponent implements OnInit {
 
   userProfile: Observable<UserProfile> | null = null;
 
-  constructor(private fb: FormBuilder, private auth: AuthService) {}
+  constructor(private fb: FormBuilder, private userService: UserService) {}
 
   ngOnInit(): void {
-    this.userProfile = this.auth.getProfile();
+    this.userProfile = this.userService.getProfile();
 
     this.initForm();
   }
