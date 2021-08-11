@@ -56,6 +56,12 @@ export class AuthService {
       : false;
   }
 
+  logout() {
+    this.user.next(null);
+    this.storageService.deleteUserData();
+    this.router.navigate(['/auth']);
+  }
+
   // Checks if token is valid long enough to prevent token expiry during user workflow
   // TODO: Research refresh tokens
   private istokenTimeValid(): boolean {
