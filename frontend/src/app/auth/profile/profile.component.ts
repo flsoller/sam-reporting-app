@@ -41,5 +41,20 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  onSubmit() {}
+  onSubmit() {
+    const valid = this.userForm.valid;
+    const email = this.userForm.value.userEmail;
+    const name = this.userForm.value.userName;
+    const currentPw = this.userForm.value.passwordChange.currentPassword;
+    const newPw = this.userForm.value.passwordChange.newPassword;
+    const confirmPw = this.userForm.value.passwordChange.passwordConfirm;
+
+    if (valid && currentPw && newPw === confirmPw) {
+      this.userService.updateUserAndPassword(email, currentPw, name, confirmPw);
+    }
+
+    if (valid && !currentPw && !newPw) {
+      this.userService.updateUser(email, name);
+    }
+  }
 }
