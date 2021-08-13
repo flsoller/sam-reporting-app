@@ -1,5 +1,5 @@
 <form [formGroup]="startForm" (ngSubmit)="onSubmit()">
-  <div class="max-w-lg mx-auto p-8">
+  <div class="max-w-lg mx-auto p-8 mt-10">
     <div class="flex flex-col">
       <mat-form-field appearance="outline">
         <mat-label>Select Customer</mat-label>
@@ -20,10 +20,6 @@
             >{{ instrument }}</mat-option
           >
         </mat-select>
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Number of Units</mat-label>
-        <input matInput formControlName="amount" type="number" />
       </mat-form-field>
     </div>
     <button mat-raised-button color="primary" type="submit" class="w-full">

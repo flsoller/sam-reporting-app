@@ -76,15 +76,16 @@ export class PortableContainerComponent implements OnInit, OnDestroy {
       });
   }
 
-  onAddInstrument() {
-    this.instruments.push(
-      this.fb.group({
-        instrumentName: [''],
-        instrumentSerialNumber: [''],
-        testDate: [''],
-        sensorData: this.fb.array([]),
-      })
-    );
+  onAddInstrument(units: number) {
+    for (let i = 0; i < units; i++)
+      this.instruments.push(
+        this.fb.group({
+          instrumentName: [''],
+          instrumentSerialNumber: [''],
+          testDate: [''],
+          sensorData: this.fb.array([]),
+        })
+      );
   }
 
   onRemoveInstrument(index: number) {

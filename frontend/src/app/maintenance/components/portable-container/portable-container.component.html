@@ -1,17 +1,29 @@
 <mat-tab-group>
   <mat-tab [label]="'Overview'">
-    <div class="flex justify-center space-x-2 mt-8">
-      <button mat-raised-button color="primary" (click)="onAddInstrument()">
-        Add Instrument
-      </button>
-      <button
-        mat-raised-button
-        color="primary"
-        (click)="onSubmitMaintenance()"
-        [disabled]="editMode"
-      >
-        Submit Maintenance
-      </button>
+    <div class="flex flex-col mt-8 w-full">
+      <div class="space-x-4 mx-auto">
+        <mat-form-field appearance="outline">
+          <mat-label>Number of Units</mat-label>
+          <input matInput type="number" #numOfUnits autocomplete="off" />
+        </mat-form-field>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="onAddInstrument(+numOfUnits.value)"
+        >
+          Add Instruments
+        </button>
+      </div>
+      <div class="mt-20 mx-auto">
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="onSubmitMaintenance()"
+          [disabled]="editMode"
+        >
+          Submit Maintenance
+        </button>
+      </div>
     </div>
   </mat-tab>
   <mat-tab

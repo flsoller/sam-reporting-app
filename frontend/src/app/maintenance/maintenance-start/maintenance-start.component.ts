@@ -20,7 +20,6 @@ export class MaintenanceStartComponent implements OnInit {
   startForm = this.fb.group({
     customer: ['', [Validators.required]],
     product: ['', [Validators.required]],
-    amount: [1, Validators.min(1)],
   });
 
   customers: Observable<Customer[]> | null = null;
@@ -33,7 +32,7 @@ export class MaintenanceStartComponent implements OnInit {
 
   instrumentSelector = [
     this.instrumentDefinition.portable,
-    this.instrumentDefinition.permanent,
+    // this.instrumentDefinition.permanent,
   ];
 
   constructor(
