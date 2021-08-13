@@ -9,18 +9,14 @@ import {
   addPortableMaintenanceData,
   getPortableMaintDataByCustomer,
   getPortableMaintDataByJobId,
-} from '../controllers/maintenanceData.js';
+} from '../controllers/portableInstruments.js';
 
 // Initialize router
 const router = express.Router();
 
 // Route definitions
-router.route('/portable').post(protectedRoute, addPortableMaintenanceData);
-router
-  .route('/portable/:customer')
-  .get(protectedRoute, getPortableMaintDataByCustomer);
-router
-  .route('/portable/id/:jobId')
-  .get(protectedRoute, getPortableMaintDataByJobId);
+router.route('').post(protectedRoute, addPortableMaintenanceData);
+router.route('/:customer').get(protectedRoute, getPortableMaintDataByCustomer);
+router.route('/id/:jobId').get(protectedRoute, getPortableMaintDataByJobId);
 
 export default router;

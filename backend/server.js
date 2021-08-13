@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 import connectDatabase from './config/database.js';
 
 // Route imports
-import maintenanceData from './Maintenance/routes/maintenanceData.js';
+import portableInstruments from './Maintenance/routes/portableInstruments.js';
 import generateReport from './Reports/routes/generateReport.js';
 import customerRoutes from './Customers/routes/customerRoutes.js';
 import userRoutes from './Auth/routes/userRoutes.js';
@@ -26,7 +26,7 @@ const app = express();
 app.use(express.json());
 
 // Mount routers
-app.use('/api/v1/maintenance-data', maintenanceData);
+app.use('/api/v1/maintenance-data/portable', portableInstruments);
 app.use('/api/v1/reports', generateReport);
 app.use('/api/v1/customers', customerRoutes);
 app.use('/api/v1/users', userRoutes);
