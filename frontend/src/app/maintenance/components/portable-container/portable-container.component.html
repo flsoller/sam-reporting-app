@@ -4,7 +4,12 @@
       <button mat-raised-button color="primary" (click)="onAddInstrument()">
         Add Instrument
       </button>
-      <button mat-raised-button color="primary" (click)="onSubmitMaintenance()">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="onSubmitMaintenance()"
+        [disabled]="editMode"
+      >
         Submit Maintenance
       </button>
     </div>
