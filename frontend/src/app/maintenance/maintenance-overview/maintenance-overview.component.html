@@ -7,7 +7,6 @@
           <mat-option
             *ngFor="let customer of customers | async"
             [value]="customer.customerName"
-            (onSelectionChange)="setMaintenanceData($event)"
             >{{ customer.customerName }}</mat-option
           >
         </mat-select>

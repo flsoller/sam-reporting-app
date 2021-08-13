@@ -22,8 +22,8 @@ import { CustomerApiService } from 'src/app/customers/customer-api.service';
 })
 export class MaintenanceOverviewComponent implements OnInit {
   searchForm = this.fb.group({
-    customer: ['', [Validators.required]],
-    showSelf: [true, [Validators.required]],
+    customer: [null, [Validators.required]],
+    showSelf: [true, []],
   });
 
   customers: Observable<Customer[]> | null = null;
@@ -39,23 +39,23 @@ export class MaintenanceOverviewComponent implements OnInit {
 
   ngOnInit(): void {
     this.customers = this.customerApi.getCustomers();
+    this.onFormChange();
   }
 
-  setMaintenanceData(event: MatOptionSelectionChange) {
-    if (event.source.selected) {
-      this.maintenanceData = [];
-      this.maintenanceApi
-        .getMaintenanceByCustomer(
-          event.source.value,
-          this.searchForm.value.showSelf
-        )
-        .subscribe((data) => {
-          this.maintenanceData = data;
-          this.snackBar.showSnackBar(
-            `Data loaded for customer: ${data[0].customer}`
-          );
-        });
-    }
+  onFormChange() {
+    this.searchForm.valueChanges.subscribe((value) => {
+      if (this.searchForm.valid) {
+        this.maintenanceData = [];
+        this.maintenanceApi
+          .getMaintenanceByCustomer(value.customer, value.showSelf)
+          .subscribe((data) => {
+            this.maintenanceData = data;
+            this.snackBar.showSnackBar(
+              `Data loaded for customer: ${data[0].customer}`
+            );
+          });
+      }
+    });
   }
 
   onGetReport(jobId: string) {
