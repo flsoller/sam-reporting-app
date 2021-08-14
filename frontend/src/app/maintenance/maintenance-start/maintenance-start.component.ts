@@ -54,8 +54,7 @@ export class MaintenanceStartComponent implements OnInit {
       switch (this.startForm.value.product) {
         case this.instrumentDefinition.portable:
           let id = this.portMaintService.createNew(
-            this.startForm.value.customer,
-            this.technicianId
+            this.startForm.value.customer
           );
           this.router.navigate(['portable', id], { relativeTo: this.route });
       }

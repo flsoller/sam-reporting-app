@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { v4 as uuidv4 } from 'uuid';
 import { AuthService } from '../auth/auth.service';
 
@@ -10,8 +11,9 @@ import { PortableUnit } from './models/portable.model';
 })
 export class PortableMaintenanceService {
   maintenanceData: PortableMaintenance[] = [];
+  technicianId = '';
 
-  constructor() {}
+  constructor(private router: Router, private auth: AuthService) {}
 
   getDataById(jobId: string): PortableMaintenance {
     let data = this.maintenanceData.filter(
@@ -20,12 +22,14 @@ export class PortableMaintenanceService {
     return data;
   }
 
-  createNew(customer: string, technicianId: string): string {
+  createNew(customer: string): string {
+    this.technicianId = this.auth.user.value?._id || '';
+
     this.maintenanceData.push({
       jobID: uuidv4(),
       customer: customer,
       instruments: [],
-      technician: technicianId,
+      technician: this.technicianId,
     });
 
     // Logging
@@ -35,6 +39,20 @@ export class PortableMaintenanceService {
     // Return id of added maintenance for router
     let id = this.maintenanceData[this.maintenanceData.length - 1].jobID;
     return id;
+  }
+
+  createNewFromCopy(customer: string, copyId: string) {
+    this.technicianId = this.auth.user.value?._id || '';
+
+    this.maintenanceData.push({
+      jobID: uuidv4(),
+      customer: customer,
+      instruments: [],
+      technician: this.technicianId,
+    });
+    let id = this.maintenanceData[this.maintenanceData.length - 1].jobID;
+
+    this.router.navigate(['maintenance', 'portable', id, 'copy', copyId]);
   }
 
   updateData(id: string, instrumentsData: PortableUnit[]) {
