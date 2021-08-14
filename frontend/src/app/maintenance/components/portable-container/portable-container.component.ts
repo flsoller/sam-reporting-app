@@ -14,7 +14,9 @@ import { PortableMaintenanceService } from '../../portable-maintenance.service';
 })
 export class PortableContainerComponent implements OnInit, OnDestroy {
   maintenanceId: string | null = '';
+  copyFromId: string | null = '';
   editMode = false;
+  copyMode = false;
 
   paramSub: Subscription = new Subscription();
 
@@ -40,10 +42,16 @@ export class PortableContainerComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.paramSub = this.route.paramMap.subscribe((param) => {
       this.maintenanceId = param.get('id');
-      this.editMode = param.get('edit') === 'edit' ? true : false;
+      this.copyFromId = param.get('copyId');
+      this.editMode = param.get('mode') === 'edit' ? true : false;
+      this.copyMode = param.get('mode') === 'copy' ? true : false;
 
       if (this.editMode) {
-        this.initForm();
+        this.initForm(this.maintenanceId || '');
+      }
+
+      if (this.copyMode) {
+        this.initForm(this.copyFromId || '');
       }
     });
 
@@ -60,20 +68,18 @@ export class PortableContainerComponent implements OnInit, OnDestroy {
     return this.instrumentForm.get('instruments') as FormArray;
   }
 
-  private initForm() {
-    this.maintenanceApiService
-      .getMaintenanceById(this.maintenanceId || '')
-      .subscribe((data) => {
-        this.maintenanceData = data[0];
-        for (let instrument of data[0].instruments) {
-          this.instruments.push(
-            this.fb.group({
-              ...instrument,
-              sensorData: this.fb.array([]),
-            })
-          );
-        }
-      });
+  private initForm(maintId: string) {
+    this.maintenanceApiService.getMaintenanceById(maintId).subscribe((data) => {
+      this.maintenanceData = data[0];
+      for (let instrument of data[0].instruments) {
+        this.instruments.push(
+          this.fb.group({
+            ...instrument,
+            sensorData: this.fb.array([]),
+          })
+        );
+      }
+    });
   }
 
   onAddInstrument(units: number) {

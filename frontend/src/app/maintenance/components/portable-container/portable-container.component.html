@@ -32,9 +32,9 @@
   >
     <app-portable-instrument
       [instrumentForm]="instrument"
-      [isEdit]="editMode"
+      [isEdit]="editMode || copyMode"
       [preloadedData]="
-        editMode ? maintenanceData.instruments[i].sensorData : null
+        editMode || copyMode ? maintenanceData.instruments[i].sensorData : null
       "
     ></app-portable-instrument>
     <div class="flex justify-end p-12">

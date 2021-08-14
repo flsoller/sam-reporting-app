@@ -48,7 +48,14 @@
 
           <!-- detail button cell -->
           <td
-            class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
+            class="
+              px-6
+              py-4
+              whitespace-nowrap
+              text-right text-sm
+              font-medium
+              space-x-2
+            "
           >
             <a
               [routerLink]="
@@ -58,12 +65,19 @@
               >Details</a
             >
             <button
-              mat-raised-button
               color="primary"
               (click)="onGetReport(maintenance.jobID)"
               class="text-indigo-600 hover:text-indigo-900"
             >
               Report
+            </button>
+
+            <button
+              color="primary"
+              (click)="onNewCopy(maintenance.jobID)"
+              class="text-indigo-600 hover:text-indigo-900"
+            >
+              New
             </button>
           </td>
         </tr>

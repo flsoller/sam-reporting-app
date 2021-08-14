@@ -20,7 +20,12 @@ const maintenanceRoutes: Routes = [
     component: PortableContainerComponent,
   },
   {
-    path: 'portable/:id/:edit',
+    path: 'portable/:id/:mode',
+    canActivate: [AuthGuard],
+    component: PortableContainerComponent,
+  },
+  {
+    path: 'portable/:id/:mode/:copyId',
     canActivate: [AuthGuard],
     component: PortableContainerComponent,
   },

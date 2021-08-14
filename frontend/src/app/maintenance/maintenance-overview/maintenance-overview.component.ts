@@ -14,6 +14,7 @@ import { MaintenanceApiService } from '../maintenance-api.service';
 import { Customer } from 'src/app/customers/models/customer.model';
 import { PortableMaintenance } from '../models/portable-maintenance.model';
 import { CustomerApiService } from 'src/app/customers/customer-api.service';
+import { PortableMaintenanceService } from '../portable-maintenance.service';
 
 @Component({
   selector: 'app-maintenance-overview',
@@ -34,7 +35,8 @@ export class MaintenanceOverviewComponent implements OnInit {
     private customerApi: CustomerApiService,
     private maintenanceApi: MaintenanceApiService,
     private reportApi: ReportApiService,
-    private snackBar: SnackBarService
+    private snackBar: SnackBarService,
+    private portMaintService: PortableMaintenanceService
   ) {}
 
   ngOnInit(): void {
@@ -67,5 +69,12 @@ export class MaintenanceOverviewComponent implements OnInit {
       const fileURL = URL.createObjectURL(file);
       window.open(fileURL, '_blank', 'noopener');
     });
+  }
+
+  onNewCopy(jobId: string) {
+    this.portMaintService.createNewFromCopy(
+      this.searchForm.value.customer,
+      jobId
+    );
   }
 }
