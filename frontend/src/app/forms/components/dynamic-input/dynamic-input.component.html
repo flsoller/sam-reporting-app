@@ -1,0 +1,25 @@
+<div [formGroup]="form">
+  <mat-form-field appearance="outline">
+    <mat-label>{{ formField.label }}</mat-label>
+
+    <div [ngSwitch]="formField.controlType">
+      <!-- case: textbox -->
+      <input
+        *ngSwitchCase="'textbox'"
+        matInput
+        [formControlName]="formField.key"
+        [type]="formField.type"
+      />
+
+      <!-- case: dropdown -->
+      <mat-select *ngSwitchCase="'dropdown'" [formControlName]="formField.key">
+        <mat-option
+          *ngFor="let option of formField.options"
+          [value]="option.key"
+          >{{ option.value }}</mat-option
+        >
+      </mat-select>
+    </div>
+  </mat-form-field>
+  <span *ngIf="!isValid">{{ formField.label }} is required!</span>
+</div>
