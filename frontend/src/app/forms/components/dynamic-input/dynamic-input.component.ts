@@ -13,4 +13,8 @@ export class DynamicInputComponent {
   get isValid() {
     return this.form.controls[this.formField.key].valid;
   }
+
+  get isTouched() {
+    return this.form.controls[this.formField.key].touched;
+  }
 }
