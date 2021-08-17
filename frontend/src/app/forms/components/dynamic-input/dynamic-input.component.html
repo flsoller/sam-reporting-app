@@ -1,5 +1,5 @@
 <div [formGroup]="form">
-  <mat-form-field appearance="outline">
+  <mat-form-field appearance="outline" class="{{ formField.widthClass }}">
     <mat-label>{{ formField.label }}</mat-label>
 
     <div [ngSwitch]="formField.controlType">

@@ -3,7 +3,7 @@ export class InputBase<T> {
   key: string;
   label: string;
   required: boolean;
-  position: number;
+  widthClass: string;
   controlType: string;
   type: string;
   options: { key: string; value: string }[];
@@ -14,7 +14,7 @@ export class InputBase<T> {
       key?: string;
       label?: string;
       required?: boolean;
-      position?: number;
+      widthClass?: string;
       controlType?: string;
       type?: string;
       options?: { key: string; value: string }[];
@@ -24,7 +24,7 @@ export class InputBase<T> {
     this.key = options.key || '';
     this.label = options.label || '';
     this.required = !!options.required;
-    this.position = options.position === undefined ? 1 : options.position;
+    this.widthClass = options.widthClass || '';
     this.controlType = options.controlType || '';
     this.type = options.type || '';
     this.options = options.options || [];
