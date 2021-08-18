@@ -96,4 +96,39 @@ export class SensorDataService {
 
     return refInfo;
   }
+
+  getAlarmDataForm() {
+    const alarmData: InputBase<string>[] = [
+      new InputTextbox({
+        key: 'alarmOne',
+        label: 'Alarm One',
+        type: 'number',
+        widthClass: 'md: w-36',
+        required: true,
+      }),
+      new InputTextbox({
+        key: 'alarmTwo',
+        label: 'Alarm Two',
+        type: 'number',
+        widthClass: 'md: w-36',
+        required: true,
+      }),
+      new InputTextbox({
+        key: 'stel',
+        label: 'STEL Alarm',
+        type: 'number',
+        widthClass: 'md: w-36',
+        required: true,
+      }),
+      new InputTextbox({
+        key: 'twa',
+        label: 'TWA Alarm',
+        type: 'number',
+        widthClass: 'md: w-36',
+        required: true,
+      }),
+    ];
+
+    return alarmData;
+  }
 }
