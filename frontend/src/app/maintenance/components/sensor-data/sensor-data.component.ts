@@ -1,32 +1,71 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormControlService } from 'src/app/forms/form-control.service';
+import { InputBase } from 'src/app/forms/models/input-base';
 
-import { GasUnit } from '../../models/sensor.model';
+import { SensorDataService } from './sensor-data.service';
 
 @Component({
   selector: 'app-sensor-data',
   templateUrl: './sensor-data.component.html',
-  styleUrls: ['./sensor-data.component.scss'],
 })
 export class SensorDataComponent implements OnInit {
-  @Input() form: any;
-  @Input() index!: number;
-  @Output() deleteRequest = new EventEmitter<number>();
+  @Output() formReady: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
   refGas: boolean = false;
   calPanelState: boolean = true;
 
-  gasUnit: GasUnit[] = [GasUnit.LEL, GasUnit.PPM, GasUnit.VOL];
+  sensorForm: FormGroup;
+  calInfoGroup: FormGroup;
+  calDataGroup: FormGroup;
+  refInfoGroup: FormGroup;
+  alarmDataGroup: FormGroup;
 
-  constructor() {}
+  calInfo: InputBase<string>[] | null;
+  calData: InputBase<string>[] | null;
+  refInfo: InputBase<string>[] | null;
+  alarmData: InputBase<string>[] | null;
 
-  ngOnInit(): void {}
+  constructor(
+    private fb: FormBuilder,
+    private fcs: FormControlService,
+    private snsrData: SensorDataService
+  ) {
+    this.calInfo = this.snsrData.getCalInfoForm();
+    this.calData = this.snsrData.getCalDataForm();
+    this.refInfo = this.snsrData.getRefgasInfoForm();
+    this.alarmData = this.snsrData.getAlarmDataForm();
+
+    this.calInfoGroup = this.fcs.createFormGroup(
+      this.calInfo as InputBase<string>[]
+    );
+    this.calDataGroup = this.fcs.createFormGroup(
+      this.calData as InputBase<string>[]
+    );
+    this.refInfoGroup = this.fcs.createFormGroup(
+      this.refInfo as InputBase<string>[]
+    );
+    this.alarmDataGroup = this.fcs.createFormGroup(
+      this.alarmData as InputBase<string>[]
+    );
+
+    this.sensorForm = this.fb.group({
+      serialNumber: ['', Validators.required],
+      calInfo: this.calInfoGroup,
+      calData: this.calData,
+      refGas: this.fb.group({
+        isUsed: '',
+        refInfo: this.refInfo,
+      }),
+      alarmData: this.alarmDataGroup,
+    });
+  }
+
+  ngOnInit(): void {
+    this.formReady.emit(this.sensorForm);
+  }
 
   onToggleRefGas() {
     this.refGas = !this.refGas;
-  }
-
-  onDeleteSensor() {
-    this.deleteRequest.emit(this.index);
   }
 }
