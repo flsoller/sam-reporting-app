@@ -23,6 +23,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MaintenanceOverviewComponent } from './maintenance-overview/maintenance-overview.component';
 import { SharedModule } from '../shared/shared.module';
+import { DynamicFormsModule } from '../forms/forms.module';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     CommonModule,
     SharedModule,
+    DynamicFormsModule,
     ReactiveFormsModule,
     MatSelectModule,
     MatFormFieldModule,
