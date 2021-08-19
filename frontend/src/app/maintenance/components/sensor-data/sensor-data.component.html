@@ -1,10 +1,10 @@
-<form [formGroup]="form" autocomplete="off">
+<form [formGroup]="sensorForm" autocomplete="off">
   <div class="max-w-2xl mx-auto">
     <!-- sensor data -->
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title> Sensor Data </mat-panel-title>
-        <mat-panel-description> </mat-panel-description>
+        <mat-panel-description></mat-panel-description>
       </mat-expansion-panel-header>
 
       <!-- serial number -->
@@ -13,47 +13,22 @@
         <input matInput formControlName="serialNumber" />
       </mat-form-field>
 
-      <!-- cal data -->
-      <div class="flex flex-col md:flex-row md:space-x-2">
-        <mat-form-field appearance="outline" class="md:w-64">
-          <mat-label>Calibration Gas</mat-label>
-          <input matInput formControlName="calGasName" />
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="md:w-32">
-          <mat-label>Concentration</mat-label>
-          <input matInput formControlName="calGasConc" type="number" />
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="md:w-24">
-          <mat-label>Unit</mat-label>
-          <mat-select formControlName="calGasUnit">
-            <mat-option *ngFor="let unit of gasUnit" [value]="unit">{{
-              unit
-            }}</mat-option>
-          </mat-select>
-        </mat-form-field>
+      <!-- cal info -->
+      <div class="flex flex-col md:flex-row md:justify-between">
+        <ng-container *ngFor="let i of calInfo">
+          <app-input [form]="calInfoGroup" [formField]="i"></app-input>
+        </ng-container>
       </div>
 
-      <div class="flex flex-col md:flex-row md:space-x-2">
-        <mat-form-field appearance="outline" class="md:w-32">
-          <mat-label>Pre Zero Data</mat-label>
-          <input matInput formControlName="preZero" type="number" />
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="md:w-32">
-          <mat-label>Aft Zero Data</mat-label>
-          <input matInput formControlName="aftZero" type="number" />
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="md:w-32">
-          <mat-label>Pre Cal Data</mat-label>
-          <input matInput formControlName="preCal" type="number" />
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="md:w-32">
-          <mat-label>Aft Cal Data</mat-label>
-          <input matInput formControlName="aftCal" type="number" />
-        </mat-form-field>
+      <!-- cal data -->
+      <div class="flex flex-col md:flex-row md:justify-between">
+        <ng-container *ngFor="let d of calData">
+          <app-input [form]="calDataGroup" [formField]="d"></app-input>
+        </ng-container>
       </div>
 
       <!-- Ref gas values (if true) -->
-      <div formGroupName="refGas" class="space-y-2">
+      <div class="space-y-2" formGroupName="refGas">
         <mat-checkbox
           (click)="onToggleRefGas()"
           (keydown)="onToggleRefGas()"
@@ -63,15 +38,9 @@
         <!-- Ref gas data -->
         <div *ngIf="refGas">
           <div class="flex flex-col md:flex-row md:space-x-2">
-            <mat-form-field appearance="outline" class="md:w-64">
-              <mat-label>Reference Gas</mat-label>
-              <input matInput formControlName="refGasName" />
-            </mat-form-field>
-
-            <mat-form-field appearance="outline" class="md:w-32">
-              <mat-label>Concentration</mat-label>
-              <input matInput formControlName="refGasConc" type="number" />
-            </mat-form-field>
+            <ng-container *ngFor="let r of refInfo">
+              <app-input [form]="refInfoGroup" [formField]="r"></app-input>
+            </ng-container>
           </div>
         </div>
       </div>
@@ -83,41 +52,22 @@
             <mat-panel-title> Alarm Data </mat-panel-title>
             <mat-panel-description></mat-panel-description>
           </mat-expansion-panel-header>
-          <div formGroupName="alarmLvls">
-            <div class="">
-              <div class="space-x-2">
-                <mat-form-field appearance="outline" class="w-36">
-                  <mat-label>Alarm One</mat-label>
-                  <input matInput formControlName="alarmOne" type="number" />
-                </mat-form-field>
-                <mat-form-field appearance="outline" class="w-36">
-                  <mat-label>Alarm Two</mat-label>
-                  <input matInput formControlName="alarmTwo" type="number" />
-                </mat-form-field>
-              </div>
-              <div class="space-x-2">
-                <mat-form-field appearance="outline" class="w-36">
-                  <mat-label>STEL Alarm</mat-label>
-                  <input matInput formControlName="stel" type="number" />
-                </mat-form-field>
-                <mat-form-field appearance="outline" class="w-36">
-                  <mat-label>TWA Alarm</mat-label>
-                  <input matInput formControlName="twa" type="number" />
-                </mat-form-field>
-              </div>
-            </div>
+          <div class="flex flex-col md:flex-row md:justify-between">
+            <ng-container *ngFor="let a of alarmData">
+              <app-input [form]="alarmDataGroup" [formField]="a"></app-input>
+            </ng-container>
           </div>
         </mat-expansion-panel>
       </div>
       <div class="flex justify-end pt-4">
-        <button
+        <!-- <button
           mat-raised-button
           color="warn"
           type="button"
           (click)="onDeleteSensor()"
         >
           Remove Sensor
-        </button>
+        </button> -->
       </div>
     </mat-expansion-panel>
   </div>
