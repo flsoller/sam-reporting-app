@@ -20,6 +20,17 @@
           >{{ option.value }}</mat-option
         >
       </mat-select>
+
+      <!-- case: datepicker -->
+      <div *ngSwitchCase="'datepicker'" class="flex h-4 items-center">
+        <input
+          matInput
+          [matDatepicker]="picker"
+          [formControlName]="formField.key"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </div>
     </div>
     <mat-error *ngIf="!isValid && isTouched"
       >{{ formField.label }} is <strong>required</strong></mat-error
