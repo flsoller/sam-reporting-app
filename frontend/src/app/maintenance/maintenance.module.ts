@@ -24,6 +24,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MaintenanceOverviewComponent } from './maintenance-overview/maintenance-overview.component';
 import { SharedModule } from '../shared/shared.module';
 import { DynamicFormsModule } from '../forms/forms.module';
+import { DeviceInfoComponent } from './components/device-info/device-info.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { DynamicFormsModule } from '../forms/forms.module';
     SensorDataComponent,
     PortableContainerComponent,
     MaintenanceOverviewComponent,
+    DeviceInfoComponent,
   ],
   imports: [
     CommonModule,

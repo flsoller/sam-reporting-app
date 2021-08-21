@@ -1,0 +1,7 @@
+<form [formGroup]="deviceInfoForm" autocomplete="off">
+  <div class="flex flex-col md:flex-row md:space-x-2">
+    <ng-container *ngFor="let i of deviceInfo">
+      <app-input [form]="deviceInfoForm" [formField]="i"></app-input>
+    </ng-container>
+  </div>
+</form>
