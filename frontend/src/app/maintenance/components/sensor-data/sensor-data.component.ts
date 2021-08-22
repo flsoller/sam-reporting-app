@@ -10,7 +10,9 @@ import { SensorDataService } from './sensor-data.service';
   templateUrl: './sensor-data.component.html',
 })
 export class SensorDataComponent implements OnInit {
+  @Input() index!: number;
   @Output() formReady: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+  @Output() deleteRequest = new EventEmitter<number>();
 
   refGas: boolean = false;
   calPanelState: boolean = true;
@@ -67,5 +69,9 @@ export class SensorDataComponent implements OnInit {
 
   onToggleRefGas() {
     this.refGas = !this.refGas;
+  }
+
+  onDeleteSensor() {
+    this.deleteRequest.emit(this.index);
   }
 }
