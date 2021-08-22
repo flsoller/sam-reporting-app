@@ -4,7 +4,9 @@
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title> Sensor Data </mat-panel-title>
-        <mat-panel-description></mat-panel-description>
+        <mat-panel-description>{{
+          calInfoGroup.get("calGasName")?.value || ""
+        }}</mat-panel-description>
       </mat-expansion-panel-header>
 
       <!-- sensor info -->
