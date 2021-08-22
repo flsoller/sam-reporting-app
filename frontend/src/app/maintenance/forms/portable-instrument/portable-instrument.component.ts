@@ -1,6 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
-import { Sensor } from '../../models/sensor.model';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-portable-instrument',
@@ -8,67 +7,41 @@ import { Sensor } from '../../models/sensor.model';
   styleUrls: ['./portable-instrument.component.scss'],
 })
 export class PortableInstrumentComponent implements OnInit {
-  @Input() instrumentForm: any;
-  @Input() preloadedData: Sensor[] | null = null;
-  @Input() isEdit = false;
+  instrumentForm: FormGroup;
+  sensors: {}[] = [{}];
 
-  constructor(private fb: FormBuilder) {}
+  @Input() index!: number;
+  @Output() formReady: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+  @Output() deleteRequest = new EventEmitter<number>();
+
+  constructor(private fb: FormBuilder) {
+    this.instrumentForm = this.fb.group({
+      sensorData: this.fb.array([]),
+    });
+  }
 
   ngOnInit(): void {
-    if (this.isEdit && this.preloadedData !== null) {
-      this.initForm();
-    }
+    this.formReady.emit(this.instrumentForm);
   }
 
-  get sensorData() {
-    return this.instrumentForm.get('sensorData') as FormArray;
-  }
-
-  private initForm() {
-    for (let sensor of this.preloadedData!) {
-      this.sensorData.push(
-        this.fb.group({
-          ...sensor,
-          refGas: this.fb.group({
-            ...sensor.refGas,
-          }),
-          alarmLvls: this.fb.group({
-            ...sensor.alarmLvls,
-          }),
-        })
-      );
-    }
+  addFormControl(controlName: string, formGroup: FormGroup) {
+    this.instrumentForm.addControl(controlName, formGroup);
   }
 
   onAddSensor() {
-    this.sensorData.push(
-      this.fb.group({
-        serialNumber: [''],
-        calGasName: [''],
-        calGasConc: [],
-        calGasUnit: [''],
-        preZero: [],
-        aftZero: [],
-        preCal: [],
-        aftCal: [],
-        refGas: this.fb.group({
-          isUsed: [false],
-          refGasName: [''],
-          refGasConc: [],
-        }),
-        alarmLvls: this.fb.group({
-          alarmOne: [],
-          alarmTwo: [],
-          // alarmThree: [], Optional display for fixed instruments
-          // alarmFour: [], Optional display for fixed instruments
-          stel: [],
-          twa: [],
-        }),
-      })
-    );
+    this.sensors.push({});
+  }
+
+  addSensor(index: number, formGroup: FormGroup) {
+    this.sensorData.insert(index, formGroup);
   }
 
   removeSensor(index: number) {
     this.sensorData.removeAt(index);
+    this.sensors.splice(index, 1);
+  }
+
+  get sensorData() {
+    return this.instrumentForm.get('sensorData') as FormArray;
   }
 }

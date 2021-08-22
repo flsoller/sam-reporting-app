@@ -1,22 +1,9 @@
 <form [formGroup]="instrumentForm" autocomplete="off">
   <div class="w-full flex justify-center mt-6">
     <!-- instrument data -->
-    <div class="flex flex-col md:flex-row md:space-x-2">
-      <mat-form-field appearance="outline" class="md:w-40">
-        <mat-label>Instrument Name</mat-label>
-        <input matInput formControlName="instrumentName" />
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="md:w-40">
-        <mat-label>Serial Number</mat-label>
-        <input matInput formControlName="instrumentSerialNumber" />
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="md:w-40">
-        <mat-label>Test Date</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="testDate" />
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-    </div>
+    <app-device-info
+      (deviceInfoReady)="addFormControl('deviceInfo', $event)"
+    ></app-device-info>
   </div>
   <div class="flex justify-center">
     <button
@@ -28,14 +15,11 @@
       Add Sensor
     </button>
   </div>
-  <ng-container
-    *ngFor="let sensor of sensorData.controls; let i = index"
-    formArrayName="sensorData"
-  >
+  <ng-container *ngFor="let sensor of sensors; let i = index">
     <div class="p-4">
       <app-sensor-data
         [index]="i"
-        [form]="sensor"
+        (formReady)="addSensor(i, $event)"
         (deleteRequest)="removeSensor($event)"
       ></app-sensor-data>
     </div>
