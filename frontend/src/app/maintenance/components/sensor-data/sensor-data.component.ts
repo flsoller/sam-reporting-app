@@ -18,11 +18,13 @@ export class SensorDataComponent implements OnInit {
   calPanelState: boolean = true;
 
   sensorForm: FormGroup;
+  sensorInfoGroup: FormGroup;
   calInfoGroup: FormGroup;
   calDataGroup: FormGroup;
   refInfoGroup: FormGroup;
   alarmDataGroup: FormGroup;
 
+  sensorInfo: InputBase<string>[] | null;
   calInfo: InputBase<string>[] | null;
   calData: InputBase<string>[] | null;
   refInfo: InputBase<string>[] | null;
@@ -33,11 +35,15 @@ export class SensorDataComponent implements OnInit {
     private fcs: FormControlService,
     private snsrData: SensorDataService
   ) {
+    this.sensorInfo = this.snsrData.getSensorInfoForm();
     this.calInfo = this.snsrData.getCalInfoForm();
     this.calData = this.snsrData.getCalDataForm();
     this.refInfo = this.snsrData.getRefgasInfoForm();
     this.alarmData = this.snsrData.getAlarmDataForm();
 
+    this.sensorInfoGroup = this.fcs.createFormGroup(
+      this.sensorInfo as InputBase<string>[]
+    );
     this.calInfoGroup = this.fcs.createFormGroup(
       this.calInfo as InputBase<string>[]
     );
@@ -52,7 +58,7 @@ export class SensorDataComponent implements OnInit {
     );
 
     this.sensorForm = this.fb.group({
-      serialNumber: ['', Validators.required],
+      sensorInfo: this.sensorInfoGroup,
       calInfo: this.calInfoGroup,
       calData: this.calData,
       refGas: this.fb.group({

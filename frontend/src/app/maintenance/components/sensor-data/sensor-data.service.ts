@@ -11,6 +11,19 @@ import { GasUnit } from '../../models/sensor.model';
 export class SensorDataService {
   gasUnit: GasUnit[] = [GasUnit.LEL, GasUnit.PPM, GasUnit.VOL];
 
+  getSensorInfoForm() {
+    const sensorInfo: InputBase<string>[] = [
+      new InputTextbox({
+        key: 'serialNumber',
+        label: 'Serial Number',
+        type: 'text',
+        required: true,
+      }),
+    ];
+
+    return sensorInfo;
+  }
+
   getCalInfoForm() {
     const calInfo: InputBase<string>[] = [
       new InputTextbox({
