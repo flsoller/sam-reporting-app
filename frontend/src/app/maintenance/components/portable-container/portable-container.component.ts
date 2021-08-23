@@ -1,6 +1,16 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
-import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  ActivatedRoute,
+  ActivatedRouteSnapshot,
+  Router,
+} from '@angular/router';
 import { Subscription } from 'rxjs';
 import { SnackBarService } from 'src/app/shared/services/snackbar.service';
 import { MaintenanceApiService } from '../../maintenance-api.service';
@@ -13,100 +23,72 @@ import { PortableMaintenanceService } from '../../portable-maintenance.service';
   styleUrls: ['./portable-container.component.scss'],
 })
 export class PortableContainerComponent implements OnInit, OnDestroy {
+  @ViewChild('numOfUnits') numOfUnits!: ElementRef;
+
   maintenanceId: string | null = '';
-  copyFromId: string | null = '';
-  editMode = false;
-  copyMode = false;
-
   paramSub: Subscription = new Subscription();
+  maintenanceData: FormGroup;
 
-  maintenanceData: PortableMaintenance = {
-    jobID: '',
-    customer: '',
-    instruments: [],
-    technician: '',
-  };
-
-  instrumentForm = this.fb.group({
-    instruments: this.fb.array([]),
-  });
+  // Needed to manage *ngFor loop of instruments
+  instrumentArray: {}[] = [{}];
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private portableMaintenanceService: PortableMaintenanceService,
     private maintenanceApiService: MaintenanceApiService,
     private snackbarService: SnackBarService,
     private fb: FormBuilder
-  ) {}
+  ) {
+    this.maintenanceData = this.fb.group({
+      jobID: ['', [Validators.required]],
+      customer: ['', [Validators.required]],
+      instruments: this.fb.array([]),
+      technician: ['', [Validators.required]],
+    });
+  }
 
   ngOnInit(): void {
     this.paramSub = this.route.paramMap.subscribe((param) => {
-      this.maintenanceId = param.get('id');
-      this.copyFromId = param.get('copyId');
-      this.editMode = param.get('mode') === 'edit' ? true : false;
-      this.copyMode = param.get('mode') === 'copy' ? true : false;
+      const id = param.get('id');
+      const data = this.portableMaintenanceService.getDataById(id || '');
 
-      if (this.editMode) {
-        this.initForm(this.maintenanceId || '');
+      if (!data) {
+        this.router.navigate(['/maintenance']);
+        return;
       }
 
-      if (this.copyMode) {
-        this.initForm(this.copyFromId || '');
-      }
+      this.maintenanceData.patchValue({
+        jobID: data.jobID,
+        customer: data.customer,
+        technician: data.technician,
+      });
     });
-
-    // Only gets data once on init for now.
-    // May need to be moved to subscription, if able to swap data for container on the fly
-    if (this.maintenanceId) {
-      this.maintenanceData = this.portableMaintenanceService.getDataById(
-        this.maintenanceId
-      );
-    }
   }
 
   get instruments() {
-    return this.instrumentForm.get('instruments') as FormArray;
-  }
-
-  private initForm(maintId: string) {
-    this.maintenanceApiService.getMaintenanceById(maintId).subscribe((data) => {
-      this.maintenanceData = data[0];
-      for (let instrument of data[0].instruments) {
-        this.instruments.push(
-          this.fb.group({
-            ...instrument,
-            sensorData: this.fb.array([]),
-          })
-        );
-      }
-    });
+    return this.maintenanceData.get('instruments') as FormArray;
   }
 
   onAddInstrument(units: number) {
-    for (let i = 0; i < units; i++)
-      this.instruments.push(
-        this.fb.group({
-          instrumentName: [''],
-          instrumentSerialNumber: [''],
-          testDate: [''],
-          sensorData: this.fb.array([]),
-        })
-      );
+    for (let i = 0; i < units; i++) {
+      this.instrumentArray.push({});
+    }
+    this.numOfUnits.nativeElement.value = 0;
+  }
+
+  addInstrumentControl(index: number, formGroup: FormGroup) {
+    this.instruments.insert(index, formGroup);
   }
 
   onRemoveInstrument(index: number) {
     this.instruments.removeAt(index);
+    this.instrumentArray.splice(index, 1);
   }
 
   onSubmitMaintenance() {
-    this.maintenanceData.instruments = this.instruments.value;
-    console.log(this.instruments.value);
-
-    this.maintenanceApiService
-      .addPortableMaintenance(this.maintenanceData)
-      .subscribe((res) => {
-        this.snackbarService.showSnackBar(res.message);
-      });
+    // Todo: Handle submit
+    console.log(this.maintenanceData.value);
   }
 
   ngOnDestroy(): void {

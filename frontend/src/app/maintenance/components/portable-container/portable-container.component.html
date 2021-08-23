@@ -19,7 +19,6 @@
           mat-raised-button
           color="primary"
           (click)="onSubmitMaintenance()"
-          [disabled]="editMode"
         >
           Submit Maintenance
         </button>
@@ -27,15 +26,18 @@
     </div>
   </mat-tab>
   <mat-tab
-    *ngFor="let instrument of instruments.controls; let i = index"
-    [label]="instrument.get('instrumentSerialNumber')?.value || 'New Unit'"
+    *ngFor="let instrument of instrumentArray; let i = index"
+    [label]="
+      this.maintenanceData.get([
+        'instruments',
+        i,
+        'deviceInfo',
+        'instrumentSerialNumber'
+      ])?.value || 'New Unit'
+    "
   >
     <app-portable-instrument
-      [instrumentForm]="instrument"
-      [isEdit]="editMode || copyMode"
-      [preloadedData]="
-        editMode || copyMode ? maintenanceData.instruments[i].sensorData : null
-      "
+      (formReady)="addInstrumentControl(i, $event)"
     ></app-portable-instrument>
     <div class="flex justify-end p-12">
       <button mat-raised-button color="warn" (click)="onRemoveInstrument(i)">
