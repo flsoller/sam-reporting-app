@@ -1,4 +1,8 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpParams,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -27,15 +31,16 @@ export class MaintenanceApiService {
   }
 
   getMaintenanceByCustomer(customer: string, filterTechnician: boolean) {
-    let queryString = '';
+    let params;
     if (filterTechnician && this.auth.user.value?._id) {
-      queryString = `?technician=${this.auth.user.value?._id}`;
+      params = new HttpParams().set('technician', this.auth.user.value?._id);
+      console.log(params.toString());
     }
 
     return this.http
-      .get<PortableMaintenance[]>(
-        `${this.baseUrl}/portable/${customer}${queryString}`
-      )
+      .get<PortableMaintenance[]>(`${this.baseUrl}/portable/${customer}`, {
+        params,
+      })
       .pipe(catchError(this.handleError.bind(this)));
   }
 
