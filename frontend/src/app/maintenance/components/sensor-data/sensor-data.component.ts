@@ -60,10 +60,10 @@ export class SensorDataComponent implements OnInit {
     this.sensorForm = this.fb.group({
       sensorInfo: this.sensorInfoGroup,
       calInfo: this.calInfoGroup,
-      calData: this.calData,
+      calData: this.calDataGroup,
       refGas: this.fb.group({
         isUsed: '',
-        refInfo: this.refInfo,
+        refInfo: this.refInfoGroup,
       }),
       alarmData: this.alarmDataGroup,
     });
