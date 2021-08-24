@@ -87,8 +87,40 @@ export class PortableContainerComponent implements OnInit, OnDestroy {
   }
 
   onSubmitMaintenance() {
-    // Todo: Handle submit
-    console.log(this.maintenanceData.value);
+    const instrumentData = this.maintenanceData.value.instruments.map(
+      (ins: any) => {
+        return {
+          ...ins.deviceInfo,
+          sensorData: ins.sensorData.map((s: any) => {
+            return {
+              ...s.sensorInfo,
+              ...s.calInfo,
+              ...s.calData,
+              refGas: {
+                isUsed: s.refGas.isUsed,
+                ...s.refGas.refInfo,
+              },
+              alarmLvls: {
+                ...s.alarmData,
+              },
+            };
+          }),
+        };
+      }
+    );
+
+    const maintenanceData = {
+      jobID: this.maintenanceData.value.jobID,
+      customer: this.maintenanceData.value.customer,
+      technician: this.maintenanceData.value.technician,
+      instruments: instrumentData,
+    };
+
+    this.maintenanceApiService
+      .addPortableMaintenance(maintenanceData)
+      .subscribe((res) => {
+        this.snackbarService.showSnackBar(res.message);
+      });
   }
 
   ngOnDestroy(): void {
