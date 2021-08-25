@@ -5,37 +5,37 @@
       <mat-expansion-panel-header>
         <mat-panel-title> Sensor Data </mat-panel-title>
         <mat-panel-description>{{
-          calInfoGroup.get("calGasName")?.value || ""
+          sensorForm.get("calGasName")?.value || ""
         }}</mat-panel-description>
       </mat-expansion-panel-header>
 
       <!-- sensor info -->
       <div class="flex flex-col md:flex-row md:justify-between">
         <ng-container *ngFor="let s of sensorInfo">
-          <app-input [form]="sensorInfoGroup" [formField]="s"></app-input>
+          <app-input [form]="sensorForm" [formField]="s"></app-input>
         </ng-container>
       </div>
 
       <!-- cal info -->
       <div class="flex flex-col md:flex-row md:justify-between">
         <ng-container *ngFor="let i of calInfo">
-          <app-input [form]="calInfoGroup" [formField]="i"></app-input>
+          <app-input [form]="sensorForm" [formField]="i"></app-input>
         </ng-container>
       </div>
 
       <!-- cal data -->
       <div class="flex flex-col md:flex-row md:justify-between">
         <ng-container *ngFor="let d of calData">
-          <app-input [form]="calDataGroup" [formField]="d"></app-input>
+          <app-input [form]="sensorForm" [formField]="d"></app-input>
         </ng-container>
       </div>
 
       <!-- Ref gas values (if true) -->
       <div class="space-y-2" formGroupName="refGas">
         <mat-checkbox
+          formControlName="isUsed"
           (click)="onToggleRefGas()"
           (keydown)="onToggleRefGas()"
-          formControlName="isUsed"
           >Reference Gas</mat-checkbox
         >
         <!-- Ref gas data -->
