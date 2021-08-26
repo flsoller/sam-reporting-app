@@ -31,6 +31,13 @@
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </div>
+
+      <!-- case: checkbox -->
+      <mat-checkbox
+        *ngSwitchCase="'checkbox'"
+        [formControlName]="formField.key"
+        >{{ formField.label }}</mat-checkbox
+      >
     </div>
     <mat-error *ngIf="!isValid && isTouched"
       >{{ formField.label }} is <strong>required</strong></mat-error
