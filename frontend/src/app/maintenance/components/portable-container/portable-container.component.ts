@@ -6,11 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {
-  ActivatedRoute,
-  ActivatedRouteSnapshot,
-  Router,
-} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { SnackBarService } from 'src/app/shared/services/snackbar.service';
 import { MaintenanceApiService } from '../../maintenance-api.service';
@@ -29,7 +25,7 @@ export class PortableContainerComponent implements OnInit, OnDestroy {
   paramSub: Subscription = new Subscription();
   maintenanceData: FormGroup;
 
-  // Needed to manage *ngFor loop of instruments
+  // Needed to manage *ngFor loop of instruments.
   instrumentArray: {}[] = [{}];
 
   constructor(
@@ -82,42 +78,35 @@ export class PortableContainerComponent implements OnInit, OnDestroy {
   }
 
   onRemoveInstrument(index: number) {
+    // Removes from FormArray
     this.instruments.removeAt(index);
+    // Removes from instrument tracker
     this.instrumentArray.splice(index, 1);
   }
 
   onSubmitMaintenance() {
+    // Lift instrument device info values out of nested form group to match backend
+    // data model.
     const instrumentData = this.maintenanceData.value.instruments.map(
       (ins: any) => {
         return {
           ...ins.deviceInfo,
-          sensorData: ins.sensorData.map((s: any) => {
-            return {
-              ...s.sensorInfo,
-              ...s.calInfo,
-              ...s.calData,
-              refGas: {
-                isUsed: s.refGas.isUsed,
-                ...s.refGas.refInfo,
-              },
-              alarmLvls: {
-                ...s.alarmData,
-              },
-            };
-          }),
+          ...ins.sensorData,
         };
       }
     );
 
-    const maintenanceData = {
+    // Set submit data values in variable.
+    const submitData: PortableMaintenance = {
       jobID: this.maintenanceData.value.jobID,
       customer: this.maintenanceData.value.customer,
       technician: this.maintenanceData.value.technician,
       instruments: instrumentData,
     };
 
+    // Submit to backend
     this.maintenanceApiService
-      .addPortableMaintenance(maintenanceData)
+      .addPortableMaintenance(submitData)
       .subscribe((res) => {
         this.snackbarService.showSnackBar(res.message);
       });
