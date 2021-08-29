@@ -1,8 +1,14 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormControlService } from 'src/app/forms/form-control.service';
 import { InputBase } from 'src/app/forms/models/input-base';
 import { DeviceInfoService } from './device-info.service';
+
+interface PreLoad {
+  instrumentName: string;
+  instrumentSerialNumber: string;
+  testDate: Date;
+}
 
 @Component({
   selector: 'app-device-info',
@@ -11,6 +17,8 @@ import { DeviceInfoService } from './device-info.service';
 export class DeviceInfoComponent implements OnInit {
   @Output() deviceInfoReady: EventEmitter<FormGroup> =
     new EventEmitter<FormGroup>();
+
+  @Input() preLoad: PreLoad | null = null;
 
   deviceInfoForm: FormGroup;
   deviceInfo: InputBase<string>[] | null;
@@ -25,5 +33,9 @@ export class DeviceInfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.deviceInfoReady.emit(this.deviceInfoForm);
+
+    if (this.preLoad) {
+      this.deviceInfoForm.patchValue({ ...this.preLoad });
+    }
   }
 }
