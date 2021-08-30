@@ -8,7 +8,6 @@ export enum InstrumentName {
 
 export interface PortableUnit {
   instrumentName: string;
-  customer: string;
   serialNumber: string;
   testDate: Date;
   sensorData: Sensor[];
