@@ -4,7 +4,7 @@ import { FormControlService } from 'src/app/forms/form-control.service';
 import { InputBase } from 'src/app/forms/models/input-base';
 import { DeviceInfoService } from './device-info.service';
 
-interface PreLoad {
+export interface PreLoadDeviceInfo {
   instrumentName: string;
   instrumentSerialNumber: string;
   testDate: Date;
@@ -18,7 +18,7 @@ export class DeviceInfoComponent implements OnInit {
   @Output() deviceInfoReady: EventEmitter<FormGroup> =
     new EventEmitter<FormGroup>();
 
-  @Input() preLoad: PreLoad | null = null;
+  @Input() preLoad: PreLoadDeviceInfo | null = null;
 
   deviceInfoForm: FormGroup;
   deviceInfo: InputBase<string>[] | null;
