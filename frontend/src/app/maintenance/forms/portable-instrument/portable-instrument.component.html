@@ -3,6 +3,7 @@
     <!-- instrument data -->
     <app-device-info
       (deviceInfoReady)="addFormControl('deviceInfo', $event)"
+      [preLoad]="deviceInfoData"
     ></app-device-info>
   </div>
   <div class="flex justify-center">
